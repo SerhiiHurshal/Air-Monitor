@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, ChangeEvent } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getPlaces } from 'redux/general/actions';
 import LocationSelectComponent from './location-select.component';
@@ -12,7 +12,7 @@ const LocationSelect = () => {
     dispatch(getPlaces('Los Angeles'));
   }, []);
 
-  const onInputChange = (e: any) => {
+  const onInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     dispatch(getPlaces(e.target.value));
   };
 

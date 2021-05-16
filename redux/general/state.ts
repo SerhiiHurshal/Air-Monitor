@@ -1,3 +1,5 @@
+import { place } from 'types';
+
 /**
  * General state
  */
@@ -10,7 +12,7 @@ class GeneralState {
   /**
    * Avaliable places
    */
-  public avaliablePlaces: string[] = [];
+  public avaliablePlaces: place[] = [];
 }
 
 export { GeneralState };
