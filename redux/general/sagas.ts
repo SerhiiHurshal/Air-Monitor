@@ -1,5 +1,7 @@
 import { all, takeLatest, put, call } from 'redux-saga/effects';
 import { getPlacesAction, mapboxFeature, mapboxPlaces } from 'types';
+import { GET_PLACES } from './action-types';
+import { setPlaces } from './actions';
 
 /**
  * General saga
@@ -22,17 +24,17 @@ function* getPlaces({
 }: getPlacesAction): Generator<any, void, mapboxPlaces> {
   const places = yield call(fetchPlaces, payload);
 
-  const parsedPlaces = places.features.map((feature: mapboxFeature) => ({
+  const parsedPlaces = places?.features?.map((feature: mapboxFeature) => ({
     id: feature.id,
     name: feature.place_name,
     center: feature.center,
   }));
 
-  yield put({ type: 'SET_PLACES', payload: parsedPlaces });
+  yield put(setPlaces(parsedPlaces));
 }
 
 function* watchGetPlaces() {
-  yield takeLatest('GET_PLACES', getPlaces);
+  yield takeLatest(GET_PLACES, getPlaces);
 }
 
 export { generalSaga };

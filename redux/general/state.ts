@@ -7,7 +7,7 @@ class GeneralState {
   /**
    * Current place
    */
-  public selectedPlace: string = '';
+  public selectedPlace: place | null = null;
 
   /**
    * Avaliable places

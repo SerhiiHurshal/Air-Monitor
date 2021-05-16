@@ -36,6 +36,11 @@ export type setPlacesAction = {
   payload: place[];
 };
 
+export type setSelectedPlaceAction = {
+  type: string;
+  payload: place;
+};
+
 export interface place {
   id: string;
   name: string;

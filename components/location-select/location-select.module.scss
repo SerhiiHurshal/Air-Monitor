@@ -1,0 +1,81 @@
+@import '../../styles/shared.scss';
+
+.selectContainer {
+  width: 19rem;
+}
+
+.optionsContainer {
+  display: none;
+  width: inherit;
+  position: absolute;
+  max-height: calc(5 * 1.5rem);
+  overflow-y: auto;
+  overflow-x: hidden;
+  border-bottom-left-radius: 0.4rem;
+  border-bottom-right-radius: 0.4rem;
+
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.2);
+
+  &::-webkit-scrollbar {
+    width: 0.5rem;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: $light-gray;
+    position: absolute;
+    border-bottom-right-radius: 0.4rem;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    border-radius: 999px;
+    background: $gray;
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    background: $dark-gray;
+  }
+}
+
+.option {
+  width: inherit;
+  padding: 0.5rem 1.3rem;
+  background-color: $white;
+  border: none;
+
+  border-bottom: 1px solid $gray;
+
+  &:last-child {
+    border-bottom: none;
+  }
+
+  &:hover,
+  &:last-child:hover {
+    border: none;
+    background-color: $light-gray;
+    transform: translateY(0px);
+    transform: scale(1.1);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.1);
+  }
+}
+
+.input {
+  width: inherit;
+  padding: 0.4rem;
+  border: 1px solid $black;
+  border-radius: 0.4rem;
+
+  &:focus,
+  &:focus-visible {
+    border-radius: 0;
+    border-top-left-radius: 0.4rem;
+    border-top-right-radius: 0.4rem;
+    border: none;
+    border-bottom: 1px solid $black;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.3), 0 6px 20px 0 rgba(0, 0, 0, 0.3);
+    outline: none;
+  }
+}
+
+.selectContainer:focus-within .optionsContainer {
+  display: block;
+}
