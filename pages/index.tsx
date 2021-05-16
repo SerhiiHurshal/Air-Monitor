@@ -1,3 +1,4 @@
+import Header from '@components/header/header.component';
 import Head from 'next/head';
 import React, { Fragment } from 'react';
 
@@ -7,9 +8,9 @@ const Home = () => {
       <Head>
         <title>Air monitor</title>
       </Head>
-      <main>
-        <h1>Air monitor</h1>
-      </main>
+      <Header />
+      <main>Air monitor</main>
+      <footer>Footer</footer>
     </Fragment>
   );
 };
