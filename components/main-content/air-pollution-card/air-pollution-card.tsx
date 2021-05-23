@@ -5,7 +5,7 @@ import { AirPollutionCardComponent } from './air-pollution-card.component';
 
 const AirPollutionCard = () => {
   const { aqi, forecast } = useSelector(
-    (state: State) => state.general.airPollutionInfo?.data,
+    (state: State) => state.general.airPollutionInfo,
   );
 
   const [status, setStatus] = useState('Loading...');

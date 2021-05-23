@@ -26,7 +26,7 @@ const MainContent = () => {
         </p>
         <p className={styles.locationInfo}>
           <span className={styles.bold}>Nearest station:</span>
-          {airPollutionInfo?.data.city.name}
+          {airPollutionInfo?.city.name}
         </p>
       </section>
       <section className={styles.cardsContainer}>

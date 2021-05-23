@@ -43,7 +43,7 @@ export type setSelectedPlaceAction = {
 
 export type setAirPollutionInfoAction = {
   type: string;
-  payload: airPollutionInfo;
+  payload: airPollutionInfoData;
 };
 
 export type setWeatherInfoAction = {
@@ -57,45 +57,46 @@ export interface place {
   center: [number, number];
 }
 
-export interface airPollutionInfo {
-  status: string;
-  data: {
-    idx: number;
-    aqi: number;
-    time: {
+export interface airPollutionInfoData {
+  idx: number;
+  aqi: number;
+  time: {
+    v: number;
+    s: string;
+    tz: string;
+  };
+  city: {
+    name: string;
+    url: string;
+    geo: [string, string]; // latitude, longitude
+  };
+  iaqi: {
+    pm25: {
       v: number;
-      s: string;
-      tz: string;
-    };
-    city: {
-      name: string;
-      url: string;
-      geo: [string, string]; // latitude, longitude
-    };
-    iaqi: {
-      pm25: {
-        v: number;
-      };
-    };
-    forecast: {
-      daily: {
-        pm25: [
-          {
-            avg: number;
-            day: string;
-            max: number;
-            min: number;
-          },
-          {
-            avg: number;
-            day: string;
-            max: number;
-            min: number;
-          },
-        ];
-      };
     };
   };
+  forecast: {
+    daily: {
+      pm25: [
+        {
+          avg: number;
+          day: string;
+          max: number;
+          min: number;
+        },
+        {
+          avg: number;
+          day: string;
+          max: number;
+          min: number;
+        },
+      ];
+    };
+  };
+}
+export interface airPollutionInfo {
+  status: string;
+  data: airPollutionInfoData;
 }
 
 export interface weatherInfo {

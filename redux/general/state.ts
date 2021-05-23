@@ -1,4 +1,4 @@
-import { airPollutionInfo, place, weatherInfo } from 'types';
+import { airPollutionInfoData, place, weatherInfo } from 'types';
 
 /**
  * General state
@@ -17,43 +17,40 @@ class GeneralState {
   /**
    * Air pollution info
    */
-  public airPollutionInfo: airPollutionInfo = {
-    status: 'loading...',
-    data: {
-      idx: 0,
-      aqi: 0,
-      time: {
+  public airPollutionInfo: airPollutionInfoData = {
+    idx: 0,
+    aqi: 0,
+    time: {
+      v: 0,
+      s: 'loading...',
+      tz: 'loading...',
+    },
+    city: {
+      name: 'loading...',
+      url: 'loading...',
+      geo: ['0', '0'], // latitude, longitude
+    },
+    iaqi: {
+      pm25: {
         v: 0,
-        s: 'loading...',
-        tz: 'loading...',
       },
-      city: {
-        name: 'loading...',
-        url: 'loading...',
-        geo: ['0', '0'], // latitude, longitude
-      },
-      iaqi: {
-        pm25: {
-          v: 0,
-        },
-      },
-      forecast: {
-        daily: {
-          pm25: [
-            {
-              avg: 0,
-              day: 'loading...',
-              max: 0,
-              min: 0,
-            },
-            {
-              avg: 0,
-              day: 'loading...',
-              max: 0,
-              min: 0,
-            },
-          ],
-        },
+    },
+    forecast: {
+      daily: {
+        pm25: [
+          {
+            avg: 0,
+            day: 'loading...',
+            max: 0,
+            min: 0,
+          },
+          {
+            avg: 0,
+            day: 'loading...',
+            max: 0,
+            min: 0,
+          },
+        ],
       },
     },
   };

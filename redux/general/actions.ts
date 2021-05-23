@@ -1,4 +1,4 @@
-import { airPollutionInfo, place, weatherInfo } from 'types';
+import { airPollutionInfoData, place, weatherInfo } from 'types';
 import {
   GET_INFO_BY_IP,
   GET_PLACES,
@@ -27,7 +27,7 @@ const getAirPollutionByIp = () => ({
   type: GET_INFO_BY_IP,
 });
 
-const setAirPollutionInfo = (airPollutionInfo: airPollutionInfo) => ({
+const setAirPollutionInfo = (airPollutionInfo: airPollutionInfoData) => ({
   type: SET_AIR_POLLUTION_INFO,
   payload: airPollutionInfo,
 });

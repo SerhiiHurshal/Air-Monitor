@@ -1,6 +1,6 @@
 import { all, takeLatest, put, call, takeEvery } from 'redux-saga/effects';
 import {
-  airPollutionInfo,
+  airPollutionInfoData,
   getPlacesAction,
   mapboxFeature,
   mapboxPlaces,
@@ -27,19 +27,20 @@ function* generalSaga() {
  */
 const fetchPlaces = async (userInput: string) => {
   const response = await fetch(
-    `https://api.mapbox.com/geocoding/v5/mapbox.places/${userInput}.json?access_token=${process.env.NEXT_PUBLIC_MAPBOX_TOKEN}`,
+    `http://localhost:3000/api/location/${userInput}`,
   );
 
-  const data: mapboxPlaces = await response.clone().json();
+  const data: mapboxPlaces = await response.json();
+
   return data;
 };
 
 function* getPlaces({
   payload,
-}: getPlacesAction): Generator<any, void, mapboxPlaces> {
+}: getPlacesAction): Generator<any, void, mapboxFeature[]> {
   const places = yield call(fetchPlaces, payload);
 
-  const parsedPlaces = places?.features?.map((feature: mapboxFeature) => ({
+  const parsedPlaces = places?.map((feature: mapboxFeature) => ({
     id: feature.id,
     name: feature.place_name,
     center: feature.center,
@@ -57,7 +58,7 @@ function* watchGetPlaces() {
  */
 const fetchWeatherInfo = async (coords: [number, number]) => {
   const response = await fetch(
-    `https://api.weatherapi.com/v1/current.json?key=${process.env.NEXT_PUBLIC_WEATHER_API_TOKEN}&q=${coords[1]},${coords[0]}&aqi=no`,
+    `http://localhost:3000/api/weather/${coords[1]},${coords[0]}`,
   );
 
   const data = await response.json();
@@ -67,7 +68,7 @@ const fetchWeatherInfo = async (coords: [number, number]) => {
 
 const fetchAirPollutionInfo = async (coords: [number, number]) => {
   const response = await fetch(
-    `https://api.waqi.info/feed/geo:${coords[1]};${coords[0]}/?token=${process.env.NEXT_PUBLIC_AIR_QUALITY_TOKEN}`,
+    `http://localhost:3000/api/air-pollution?coords:${coords[1]};${coords[0]}`,
   );
 
   const data = await response.json();
@@ -76,7 +77,7 @@ const fetchAirPollutionInfo = async (coords: [number, number]) => {
 };
 
 function* getInfo(action: setSelectedPlaceAction): Generator<any, void, any> {
-  const airPollutionInfo: airPollutionInfo = yield call(
+  const airPollutionInfo: airPollutionInfoData = yield call(
     fetchAirPollutionInfo,
     action.payload.center,
   );
@@ -97,9 +98,7 @@ function* watchGetInfo() {
  * Get info by ip
  */
 const fetchAirPollutionInfoByIp = async () => {
-  const response = await fetch(
-    `https://api.waqi.info/feed/here/?token=${process.env.NEXT_PUBLIC_AIR_QUALITY_TOKEN}`,
-  );
+  const response = await fetch(`http://localhost:3000/api/air-pollution`);
 
   const data = await response.json();
 
@@ -107,14 +106,14 @@ const fetchAirPollutionInfoByIp = async () => {
 };
 
 function* getInfoByIp(): Generator<any, void, any> {
-  const airPollutionInfo: airPollutionInfo = yield call(
+  const airPollutionInfo: airPollutionInfoData = yield call(
     fetchAirPollutionInfoByIp,
   );
 
   const place = {
-    id: airPollutionInfo.data.idx.toString(),
-    name: airPollutionInfo.data.city.name,
-    center: airPollutionInfo.data.city.geo
+    id: airPollutionInfo.idx.toString(),
+    name: airPollutionInfo.city.name,
+    center: airPollutionInfo.city.geo
       .map((coord: string) => Number(coord))
       .reverse() as [number, number],
   };
