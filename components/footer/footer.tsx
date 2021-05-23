@@ -6,15 +6,27 @@ import styles from './footer.module.scss';
 
 const Footer = () => (
   <footer className={styles.footer}>
-    <h6 className={styles.copyright}>Copyright © 2021 </h6>
+    <p className={styles.copyright}>Copyright © 2021 </p>
     <div className={styles.socialMediaIcons}>
-      <a href='mailto:seergiygurshall@gmail.com'>
+      <a
+        href='mailto:seergiygurshall@gmail.com'
+        title='send email'
+        className={styles.linkicon}
+      >
         <MailIcon alt='email icon' className={styles.icon} />
       </a>
-      <a href='https://github.com/SergiyGurshal/air-pollution-web-app'>
+      <a
+        href='https://github.com/SergiyGurshal/air-pollution-web-app'
+        title='link to Github'
+        className={styles.linkicon}
+      >
         <GithubIcon alt='github icon' className={styles.icon} />
       </a>
-      <a href='https://www.linkedin.com/in/sergiy-gurshal/'>
+      <a
+        href='https://www.linkedin.com/in/sergiy-gurshal/'
+        title='link to Linkedin'
+        className={styles.linkicon}
+      >
         <LinkedinIcon alt='linkedin icon' className={styles.icon} />
       </a>
     </div>

@@ -21,7 +21,17 @@ const WeatherCardComponent = ({
   icon,
 }: Props) => (
   <Card title='Weather'>
-    {icon ? <img src={icon} className={styles.icon} /> : <LoadingIcon />}
+    {icon ? (
+      <img
+        src={icon}
+        className={styles.icon}
+        width={128}
+        height={128}
+        alt='weather icon'
+      />
+    ) : (
+      <LoadingIcon />
+    )}
     <p className={styles.status}>{`${temp_c}°C`}</p>
     <div className={styles.aditionalInfoContainer}>
       <p className={styles.aditionalInfo}>{`Pressure: ${pressure_mb} hPa`}</p>

@@ -1,13 +1,12 @@
+@import '../../styles/shared.scss';
+
 .footer {
+  @include flex(center, center, column);
   height: 10%;
   width: 100%;
-  border-top: 1px solid #888888;
+  border-top: 1px solid $gray;
   position: absolute;
   bottom: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
   padding-bottom: 0.5rem;
 }
 
@@ -19,9 +18,13 @@
 }
 
 .socialMediaIcons {
-  display: flex;
-  justify-content: center;
+  @include flex(center);
   margin-top: 0.4rem;
+}
+
+.linkicon {
+  @include flex(center);
+  width: 4rem;
 }
 
 .icon {
@@ -36,20 +39,21 @@
   padding: 0.5rem 0.3rem;
   right: 0;
   bottom: 0;
-  color: #bdbdbd;
+  color: $dark-gray;
 
   & > a {
-    color: #bdbdbd;
+    color: $dark-gray;
+    padding: 0 0.2rem;
   }
 }
 
-@media only screen and (max-width: 600px) {
+@media (max-width: 664px) {
   .socialMediaIcons {
     margin-bottom: 1.2rem;
   }
 }
 
-@media only screen and (max-width: 970px), only screen and (max-height: 650px) {
+@media (max-width: 864px), (max-height: 650px) {
   .footer {
     height: max-content;
     position: relative;
