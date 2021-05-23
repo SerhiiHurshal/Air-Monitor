@@ -1,10 +1,11 @@
-import { Card } from '@components/card/card';
 import { Fragment, useEffect } from 'react';
 import { State } from '@redux/state';
 
 import styles from './main-content.module.scss';
 import { useDispatch, useSelector } from 'react-redux';
 import { getAirPollutionByIp } from '@redux/general/actions';
+import { WeatherCard } from './weather-card/weather-card';
+import { AirPollutionCard } from './air-pollution-card/air-pollution-card';
 
 const MainContent = () => {
   const { selectedPlace, airPollutionInfo } = useSelector(
@@ -19,32 +20,18 @@ const MainContent = () => {
   return (
     <Fragment>
       <section className={styles.infoBlock}>
-        <p>{`Current place ${selectedPlace?.name}`}</p>
-        <p>{`Nearest station ${airPollutionInfo?.data.city.name}`}</p>
+        <p className={styles.locationInfo}>
+          <span className={styles.bold}>Current place:</span>
+          {selectedPlace?.name}
+        </p>
+        <p className={styles.locationInfo}>
+          <span className={styles.bold}>Nearest station:</span>
+          {airPollutionInfo?.data.city.name}
+        </p>
       </section>
       <section className={styles.cardsContainer}>
-        <Card title='Weather'>
-          <img src={'image'} className='content__icon' />
-          <p className='content__title'>{'title'}</p>
-          <div className='content__aditional-info'>
-            <p className='aditional-info__text'>{`AQI value based on US EPA standard: ${'AQIUS'}`}</p>
-            <p className='aditional-info__text'>
-              {`AQI value based on China MEP standard: ${'AQICN'}`}{' '}
-            </p>
-          </div>
-          <div className='card__footer' />
-        </Card>
-        <Card title='Air Pollution'>
-          <img src={'image'} className='content__icon' />
-          <p className='content__title'>{'title'}</p>
-          <div className='content__aditional-info'>
-            <p className='aditional-info__text'>{`AQI value based on US EPA standard: ${'AQIUS'}`}</p>
-            <p className='aditional-info__text'>
-              {`AQI value based on China MEP standard: ${'AQICN'}`}{' '}
-            </p>
-          </div>
-          <div className='card__footer' />
-        </Card>
+        <WeatherCard />
+        <AirPollutionCard />
       </section>
     </Fragment>
   );

@@ -1,0 +1,57 @@
+.footer {
+  height: 10%;
+  width: 100%;
+  border-top: 1px solid #888888;
+  position: absolute;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding-bottom: 0.5rem;
+}
+
+.copyright {
+  margin: 0;
+  margin-top: 1rem;
+  text-align: center;
+  font-size: 1rem;
+}
+
+.socialMediaIcons {
+  display: flex;
+  justify-content: center;
+  margin-top: 0.4rem;
+}
+
+.icon {
+  width: 1.3rem;
+  margin: 0 0.3rem;
+  cursor: pointer;
+}
+
+.licenseTitle {
+  font-size: 0.8rem;
+  position: absolute;
+  padding: 0.5rem 0.3rem;
+  right: 0;
+  bottom: 0;
+  color: #bdbdbd;
+
+  & > a {
+    color: #bdbdbd;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .socialMediaIcons {
+    margin-bottom: 1.2rem;
+  }
+}
+
+@media only screen and (max-width: 970px), only screen and (max-height: 650px) {
+  .footer {
+    height: max-content;
+    position: relative;
+  }
+}

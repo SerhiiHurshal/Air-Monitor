@@ -1,3 +1,4 @@
+import { Footer } from '@components/footer/footer';
 import Header from '@components/header/header.component';
 import MainContent from '@components/main-content/main-content.component';
 import Head from 'next/head';
@@ -15,7 +16,7 @@ const Home = () => {
       </Head>
       <Header />
       <MainContent />
-      <footer>Footer</footer>
+      <Footer />
     </Fragment>
   );
 };

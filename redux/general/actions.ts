@@ -1,10 +1,11 @@
-import { airPollutionInfo, place } from 'types';
+import { airPollutionInfo, place, weatherInfo } from 'types';
 import {
   GET_AIR_POLLUTION_BY_IP,
   GET_PLACES,
   SET_CURRENT_PLACE,
   SET_PLACES,
   SET_AIR_POLLUTION_INFO,
+  SET_WEATHER_INFO,
 } from './action-types';
 
 const getPlaces = (userInput: string) => ({
@@ -31,10 +32,16 @@ const setAirPollutionInfo = (airPollutionInfo: airPollutionInfo) => ({
   payload: airPollutionInfo,
 });
 
+const setWeatherInfo = (airPollutionInfo: weatherInfo) => ({
+  type: SET_WEATHER_INFO,
+  payload: airPollutionInfo,
+});
+
 export {
   getPlaces,
   setSelectedPlace,
   setPlaces,
   getAirPollutionByIp,
   setAirPollutionInfo,
+  setWeatherInfo,
 };

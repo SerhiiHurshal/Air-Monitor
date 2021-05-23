@@ -5,23 +5,25 @@ import {
   mapboxFeature,
   mapboxPlaces,
   setSelectedPlaceAction,
+  weatherInfo,
 } from 'types';
 import {
   GET_AIR_POLLUTION_BY_IP,
   GET_PLACES,
   SET_CURRENT_PLACE,
 } from './action-types';
-import { setAirPollutionInfo, setPlaces, setSelectedPlace } from './actions';
+import {
+  setAirPollutionInfo,
+  setPlaces,
+  setSelectedPlace,
+  setWeatherInfo,
+} from './actions';
 
 /**
  * General saga
  */
 function* generalSaga() {
-  yield all([
-    watchGetPlaces(),
-    watchGetAirPollutionInfo(),
-    watchGetAirPollutionInfoByIp(),
-  ]);
+  yield all([watchGetPlaces(), watchGetInfo(), watchGetInfoByIp()]);
 }
 
 /**
@@ -55,7 +57,7 @@ function* watchGetPlaces() {
 }
 
 /**
- * Get air pollution info
+ * Get info
  */
 
 const fetchAirPollution = async (coords: [number, number]) => {
@@ -68,21 +70,32 @@ const fetchAirPollution = async (coords: [number, number]) => {
   return data;
 };
 
-function* getAirPollutionInfo(
-  action: setSelectedPlaceAction,
-): Generator<any, void, airPollutionInfo> {
-  const info = yield call(fetchAirPollution, action.payload.center);
+function* getInfo(action: setSelectedPlaceAction): Generator<any, void, any> {
+  const airPollutionInfo = yield call(fetchAirPollution, action.payload.center);
 
-  yield put(setAirPollutionInfo(info));
+  const weatherInfo = yield call(fetchWeatherInfoByIp, action.payload.center);
+
+  yield put(setWeatherInfo(weatherInfo));
+  yield put(setAirPollutionInfo(airPollutionInfo));
 }
 
-function* watchGetAirPollutionInfo() {
-  yield takeEvery(SET_CURRENT_PLACE, getAirPollutionInfo);
+function* watchGetInfo() {
+  yield takeEvery(SET_CURRENT_PLACE, getInfo);
 }
 
 /**
- * Get air pollution info by ip
+ * Get info by ip
  */
+
+const fetchWeatherInfoByIp = async (coords: [number, number]) => {
+  const response = await fetch(
+    `https://api.weatherapi.com/v1/current.json?key=${process.env.NEXT_PUBLIC_WEATHER_API_TOKEN}&q=${coords[1]},${coords[0]}&aqi=no`,
+  );
+
+  const data = await response.json();
+
+  return data;
+};
 
 const fetchAirPollutionInfoByIp = async () => {
   const response = await fetch(
@@ -94,25 +107,31 @@ const fetchAirPollutionInfoByIp = async () => {
   return data;
 };
 
-function* getAirPollutionInfoByIp(): Generator<any, void, airPollutionInfo> {
-  const info = yield call(fetchAirPollutionInfoByIp);
+function* getInfoByIp(): Generator<any, void, any> {
+  const airPollutionInfo = yield call(fetchAirPollutionInfoByIp);
 
-  yield put(setAirPollutionInfo(info));
+  yield put(setAirPollutionInfo(airPollutionInfo));
 
   const place = {
-    id: info.data.idx.toString(),
-    name: info.data.city.name,
-    center: info.data.city.geo.map((coord) => Number(coord)).reverse() as [
-      number,
-      number,
-    ],
+    id: airPollutionInfo.data.idx.toString(),
+    name: airPollutionInfo.data.city.name,
+    center: airPollutionInfo.data.city.geo
+      .map((coord: string) => Number(coord))
+      .reverse() as [number, number],
   };
+
+  const weatherInfo: weatherInfo = yield call(
+    fetchWeatherInfoByIp,
+    place.center,
+  );
+
+  yield put(setWeatherInfo(weatherInfo));
 
   yield put(setSelectedPlace(place));
 }
 
-function* watchGetAirPollutionInfoByIp() {
-  yield takeLatest(GET_AIR_POLLUTION_BY_IP, getAirPollutionInfoByIp);
+function* watchGetInfoByIp() {
+  yield takeLatest(GET_AIR_POLLUTION_BY_IP, getInfoByIp);
 }
 
 export { generalSaga };
