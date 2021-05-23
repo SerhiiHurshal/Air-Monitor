@@ -1,12 +1,9 @@
 import Header from '@components/header/header.component';
+import MainContent from '@components/main-content/main-content.component';
 import Head from 'next/head';
 import React, { Fragment } from 'react';
-import { useSelector } from 'react-redux';
-import { State } from 'redux/state';
 
 const Home = () => {
-  const { selectedPlace } = useSelector((state: State) => state.general);
-
   return (
     <Fragment>
       <Head>
@@ -17,7 +14,7 @@ const Home = () => {
         />
       </Head>
       <Header />
-      {selectedPlace && <main>{selectedPlace.name}</main>}
+      <MainContent />
       <footer>Footer</footer>
     </Fragment>
   );

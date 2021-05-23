@@ -1,4 +1,4 @@
-import { place } from 'types';
+import { airPollutionInfo, place } from 'types';
 
 /**
  * General state
@@ -13,6 +13,11 @@ class GeneralState {
    * Avaliable places
    */
   public avaliablePlaces: place[] = [];
+
+  /**
+   * Air pollution info
+   */
+  public airPollutionInfo: airPollutionInfo | null = null;
 }
 
 export { GeneralState };

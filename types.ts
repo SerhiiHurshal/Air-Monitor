@@ -7,7 +7,7 @@ export interface mapboxFeature {
   text: string;
   place_name: string;
   bbox: [number, number, number, number];
-  center: [number, number];
+  center: [number, number]; // longitude, latitude
   geometry: {
     type: string;
     coordinates: [number, number];
@@ -41,8 +41,54 @@ export type setSelectedPlaceAction = {
   payload: place;
 };
 
+export type setAirPollutionInfoAction = {
+  type: string;
+  payload: airPollutionInfo;
+};
+
 export interface place {
   id: string;
   name: string;
   center: [number, number];
+}
+
+export interface airPollutionInfo {
+  status: string;
+  data: {
+    idx: number;
+    aqi: number;
+    time: {
+      v: number;
+      s: string;
+      tz: string;
+    };
+    city: {
+      name: string;
+      url: string;
+      geo: [string, string]; // latitude, longitude
+    };
+    iaqi: {
+      pm25: {
+        v: number;
+      };
+    };
+    forecast: {
+      daily: {
+        pm25: [
+          {
+            avg: number;
+            day: string;
+            max: number;
+            min: number;
+          },
+          {
+            avg: number;
+            day: string;
+            max: number;
+            min: number;
+          },
+        ];
+      };
+    };
+  };
 }
