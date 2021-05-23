@@ -1,4 +1,5 @@
 import { FC, RefObject } from 'react';
+
 import styles from './card.module.scss';
 
 interface CardProps {

@@ -1,7 +1,7 @@
 import { ChangeEvent, MouseEvent, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getPlaces, setPlaces, setSelectedPlace } from 'redux/general/actions';
-import LocationSelectComponent from './location-select.component';
+import { LocationSelectComponent } from './location-select.component';
 import { State } from '../../../redux/state';
 
 const LocationSelect = () => {
@@ -41,4 +41,4 @@ const LocationSelect = () => {
   );
 };
 
-export default LocationSelect;
+export { LocationSelect };

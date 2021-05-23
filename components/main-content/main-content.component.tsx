@@ -1,11 +1,11 @@
 import { Fragment, useEffect } from 'react';
 import { State } from '@redux/state';
-
-import styles from './main-content.module.scss';
 import { useDispatch, useSelector } from 'react-redux';
 import { getAirPollutionByIp } from '@redux/general/actions';
 import { WeatherCard } from './weather-card/weather-card';
 import { AirPollutionCard } from './air-pollution-card/air-pollution-card';
+
+import styles from './main-content.module.scss';
 
 const MainContent = () => {
   const { selectedPlace, airPollutionInfo } = useSelector(
@@ -37,4 +37,4 @@ const MainContent = () => {
   );
 };
 
-export default MainContent;
+export { MainContent };

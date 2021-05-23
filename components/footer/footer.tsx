@@ -3,7 +3,6 @@ import GithubIcon from '@images/social_media_icons/github.svg';
 import LinkedinIcon from '@images/social_media_icons/linkedin.svg';
 
 import styles from './footer.module.scss';
-import Link from 'next/link';
 
 const Footer = () => (
   <footer className={styles.footer}>

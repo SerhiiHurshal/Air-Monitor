@@ -1,8 +1,8 @@
+import { LocationSelect } from './location-select/location-select';
+
 import LogoSvg from '@images/logo.svg';
 
 import styles from './header.module.scss';
-
-import LocationSelect from './location-select/location-select';
 
 const Header = () => (
   <header className={styles.header}>
@@ -12,4 +12,4 @@ const Header = () => (
   </header>
 );
 
-export default Header;
+export { Header };

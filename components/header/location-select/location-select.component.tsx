@@ -43,4 +43,4 @@ const LocationSelectComponent = ({
   </div>
 );
 
-export default LocationSelectComponent;
+export { LocationSelectComponent };

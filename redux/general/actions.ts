@@ -1,6 +1,6 @@
 import { airPollutionInfo, place, weatherInfo } from 'types';
 import {
-  GET_AIR_POLLUTION_BY_IP,
+  GET_INFO_BY_IP,
   GET_PLACES,
   SET_CURRENT_PLACE,
   SET_PLACES,
@@ -24,7 +24,7 @@ const setSelectedPlace = (place: place) => ({
 });
 
 const getAirPollutionByIp = () => ({
-  type: GET_AIR_POLLUTION_BY_IP,
+  type: GET_INFO_BY_IP,
 });
 
 const setAirPollutionInfo = (airPollutionInfo: airPollutionInfo) => ({

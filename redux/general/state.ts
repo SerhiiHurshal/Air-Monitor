@@ -80,7 +80,7 @@ class GeneralState {
       is_day: 0,
       condition: {
         text: 'loading...',
-        icon: 'loading...',
+        icon: '',
         code: 0,
       },
       wind_mph: 0,

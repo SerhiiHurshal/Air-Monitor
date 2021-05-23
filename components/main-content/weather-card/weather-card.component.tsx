@@ -1,4 +1,5 @@
 import { Card } from '@components/card/card';
+import LoadingIcon from '@images/loading.svg';
 
 import styles from './weather-card.module.scss';
 
@@ -20,7 +21,7 @@ const WeatherCardComponent = ({
   icon,
 }: Props) => (
   <Card title='Weather'>
-    <img src={icon} className={styles.icon} />
+    {icon ? <img src={icon} className={styles.icon} /> : <LoadingIcon />}
     <p className={styles.status}>{`${temp_c}°C`}</p>
     <div className={styles.aditionalInfoContainer}>
       <p className={styles.aditionalInfo}>{`Pressure: ${pressure_mb} hPa`}</p>
