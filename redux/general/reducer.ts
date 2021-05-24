@@ -1,10 +1,4 @@
 import {
-  setSelectedPlaceAction,
-  setPlacesAction,
-  setAirPollutionInfoAction,
-  setWeatherInfoAction,
-} from 'types';
-import {
   SET_AIR_POLLUTION_INFO,
   SET_CURRENT_PLACE,
   SET_PLACES,
