@@ -4,10 +4,13 @@
   @include flex(center, center, column);
   height: 10%;
   width: 100%;
-  border-top: 1px solid $gray;
+  border-top: 1px solid $divider-color-primary;
   position: absolute;
   bottom: 0;
   padding-bottom: 0.5rem;
+  background-color: $primary;
+
+  @include color-change-animation();
 }
 
 .copyright {
@@ -15,6 +18,9 @@
   margin-top: 1rem;
   text-align: center;
   font-size: 1rem;
+  color: $font-color-secondary;
+
+  @include color-change-animation();
 }
 
 .socialMediaIcons {
@@ -39,11 +45,15 @@
   padding: 0.5rem 0.3rem;
   right: 0;
   bottom: 0;
-  color: $dark-gray;
+  color: $font-color-secondary;
+
+  @include color-change-animation();
 
   & > a {
-    color: $dark-gray;
+    color: $font-color-secondary;
     padding: 0 0.2rem;
+
+    @include color-change-animation();
   }
 }
 

@@ -99,6 +99,11 @@ class GeneralState {
       gust_kph: 0,
     },
   };
+
+  /**
+   * Theme
+   */
+  public theme: 'light' | 'dark' = 'light';
 }
 
 export { GeneralState };

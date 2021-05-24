@@ -14,35 +14,46 @@
   border-bottom-left-radius: 0.4rem;
   border-bottom-right-radius: 0.4rem;
 
-  box-shadow: 0 4px 8px 0 $black-transparent, 0 6px 20px 0 $black-transparent;
+  box-shadow: 0 4px 8px 0 $shadow-transparent, 0 6px 20px 0 $shadow-transparent;
+
+  @include color-change-animation();
 
   &::-webkit-scrollbar {
     width: 0.5rem;
   }
 
   &::-webkit-scrollbar-track {
-    background: $light-gray;
+    background: $secondary;
     position: absolute;
     border-bottom-right-radius: 0.4rem;
+
+    @include color-change-animation();
   }
 
   &::-webkit-scrollbar-thumb {
     border-radius: 999px;
-    background: $gray;
+    background: $divider-color-primary;
+
+    @include color-change-animation();
   }
 
   &::-webkit-scrollbar-thumb:hover {
-    background: $dark-gray;
+    background: $font-color-primary;
+
+    @include color-change-animation();
   }
 }
 
 .option {
   width: inherit;
   padding: 0.5rem 1.3rem;
-  background-color: $white;
+  background-color: $secondary;
   border: none;
+  color: $font-color-primary;
 
-  border-bottom: 1px solid $gray;
+  border-bottom: 1px solid $divider-color-primary;
+
+  @include color-change-animation();
 
   &:last-child {
     border-bottom: none;
@@ -51,19 +62,25 @@
   &:hover,
   &:last-child:hover {
     border: none;
-    background-color: $light-gray;
+    background-color: $select-hover-color;
     transform: translateY(0px);
     transform: scale(1.1);
-    box-shadow: 0 4px 8px 0 $black-transparent-low,
-      0 6px 20px 0 $black-transparent-low;
+    box-shadow: 0 4px 8px 0 $shadow-transparent-low,
+      0 6px 20px 0 $shadow-transparent-low;
+
+    @include color-change-animation();
   }
 }
 
 .input {
   width: inherit;
   padding: 0.4rem;
-  border: 1px solid $black;
+  border: 1px solid $divider-color-primary;
   border-radius: 0.4rem;
+  color: $font-color-primary;
+  background-color: transparent;
+
+  @include color-change-animation();
 
   &:focus,
   &:focus-visible {
@@ -71,9 +88,9 @@
     border-top-left-radius: 0.4rem;
     border-top-right-radius: 0.4rem;
     border: none;
-    border-bottom: 1px solid $black;
-    box-shadow: 0 4px 8px 0 $black-transparent-high,
-      0 6px 20px 0 $black-transparent-high;
+    border-bottom: 1px solid $select-hover-color;
+    box-shadow: 0 4px 8px 0 $shadow-transparent-high,
+      0 6px 20px 0 $shadow-transparent-high;
     outline: none;
   }
 }

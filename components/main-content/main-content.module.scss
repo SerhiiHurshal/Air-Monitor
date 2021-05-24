@@ -3,11 +3,18 @@
 .cardsContainer {
   @include flex(space-around);
   flex-wrap: wrap;
+  background-color: $secondary;
+
+  @include color-change-animation();
 }
 
 .infoBlock {
   @include flex(space-around);
   flex-wrap: wrap;
+  background-color: transparent;
+  color: $font-color-secondary;
+
+  @include color-change-animation();
 }
 
 .locationInfo {

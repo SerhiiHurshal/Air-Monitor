@@ -6,4 +6,31 @@
 
 body {
   font-family: 'Roboto', sans-serif;
+  background-color: var(--secondary);
+
+  transition: background 500ms ease-in-out;
+}
+
+.light {
+  --primary: #fff;
+  --secondary: #fff;
+  --font-color-primary: #555;
+  --font-color-secondary: #000;
+  --divider-color-primary: #888;
+  --shadow-transparent-low: rgba(0, 0, 0, 0.1);
+  --shadow-transparent: rgba(0, 0, 0, 0.2);
+  --shadow-transparent-high: rgba(0, 0, 0, 0.3);
+  --select-hover-color: #f1f1f1;
+}
+
+.dark {
+  --primary: #2c2727;
+  --secondary: #4f4d4d;
+  --font-color-primary: #fff;
+  --font-color-secondary: #c4c4c4;
+  --divider-color-primary: #c4c4c4;
+  --shadow-transparent-low: rgba(0, 0, 0, 0.1);
+  --shadow-transparent: rgba(0, 0, 0, 0.2);
+  --shadow-transparent-high: rgba(0, 0, 0, 0.3);
+  --select-hover-color: #555;
 }

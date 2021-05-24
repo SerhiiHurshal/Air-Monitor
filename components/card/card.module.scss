@@ -2,21 +2,25 @@
 
 .card {
   border-radius: 1rem;
-  box-shadow: 0 4px 8px 0 $black-transparent, 0 6px 20px 0 $black-transparent;
+  box-shadow: 0 4px 8px 0 $shadow-transparent, 0 6px 20px 0 $shadow-transparent;
   width: 25rem;
   height: 30rem;
-  background-color: $white;
+  background-color: $secondary;
   margin: 0 1rem;
   margin-bottom: 3rem;
+
+  @include color-change-animation();
 }
 
 .title {
   text-align: center;
   font-size: 2rem;
   padding: 1rem 0;
-  border-bottom: 1px solid $gray;
-  color: $dark-gray;
+  border-bottom: 1px solid $divider-color-primary;
+  color: $font-color-primary;
   margin: 0;
+
+  @include color-change-animation();
 }
 
 .content {
@@ -28,7 +32,9 @@
 
 .footer {
   height: 4rem;
-  border-top: 1px solid $gray;
+  border-top: 1px solid $divider-color-primary;
+
+  @include color-change-animation();
 }
 
 @media (max-width: 864px) and (max-height: 650px) {

@@ -6,6 +6,7 @@ import {
   SET_PLACES,
   SET_AIR_POLLUTION_INFO,
   SET_WEATHER_INFO,
+  SET_THEME,
 } from './action-types';
 
 const getPlaces = (userInput: string) => ({
@@ -37,6 +38,11 @@ const setWeatherInfo = (airPollutionInfo: weatherInfo) => ({
   payload: airPollutionInfo,
 });
 
+const setTheme = (theme: string) => ({
+  type: SET_THEME,
+  payload: theme,
+});
+
 export {
   getPlaces,
   setSelectedPlace,
@@ -44,4 +50,5 @@ export {
   getAirPollutionByIp,
   setAirPollutionInfo,
   setWeatherInfo,
+  setTheme,
 };

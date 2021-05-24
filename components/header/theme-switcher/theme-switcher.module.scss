@@ -1,0 +1,40 @@
+@import '../../../styles/shared.scss';
+
+.container {
+  @include flex(center, center);
+  justify-self: flex-end;
+  margin-left: auto;
+  margin-right: 2rem;
+}
+
+.button {
+  background-color: transparent;
+  border-radius: 50%;
+  border: none;
+
+  &::before {
+    font-size: 1.5rem;
+    position: absolute;
+  }
+}
+
+.buttonLight::before {
+  transform: translate(0, -50%);
+  content: '\01F31E';
+  transition: transform 0.5s ease-in-out;
+}
+
+.buttonDark::before {
+  transform: translate(90%, -50%);
+  content: '\01F311';
+  transition: transform 0.5s ease-in-out;
+}
+
+.line {
+  height: 1rem;
+  width: 3rem;
+  background-color: $font-color-primary;
+  border-radius: 999px;
+
+  @include color-change-animation();
+}

@@ -1,10 +1,20 @@
-import { Fragment } from 'react';
+import { Fragment, useEffect } from 'react';
 import { Header } from '@components/header/header.component';
 import { MainContent } from '@components/main-content/main-content.component';
 import { Footer } from '@components/footer/footer';
 import Head from 'next/head';
+import { useSelector } from 'react-redux';
+import { State } from '@redux/state';
 
 const Home = () => {
+  const { theme } = useSelector((state: State) => state.general);
+
+  useEffect(() => {
+    const body = document.getElementsByTagName('body');
+
+    body[0].className = theme;
+  }, [theme]);
+
   return (
     <Fragment>
       <Head>

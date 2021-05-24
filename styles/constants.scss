@@ -1,8 +1,9 @@
-$white: #fff;
-$light-gray: #f1f1f1;
-$gray: #888;
-$dark-gray: #555;
-$black: #000;
-$black-transparent-low: rgba(0, 0, 0, 0.1);
-$black-transparent: rgba(0, 0, 0, 0.2);
-$black-transparent-high: rgba(0, 0, 0, 0.3);
+$primary: var(--primary);
+$secondary: var(--secondary);
+$font-color-primary: var(--font-color-primary);
+$font-color-secondary: var(--font-color-secondary);
+$divider-color-primary: var(--divider-color-primary);
+$shadow-transparent-low: var(--shadow-transparent-low);
+$shadow-transparent: var(--shadow-transparent);
+$shadow-transparent-high: var(--shadow-transparent-high);
+$select-hover-color: var(--select-hover-color);
