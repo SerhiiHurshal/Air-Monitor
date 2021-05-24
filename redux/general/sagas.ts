@@ -67,8 +67,6 @@ const fetchWeatherInfo = async (coords: [number, number]) => {
 };
 
 const fetchAirPollutionInfo = async (coords: [number, number]) => {
-  console.log(coords);
-
   const response = await fetch(
     `${process.env.NEXT_PUBLIC_API_URL}/api/air-pollution/${coords[1]};${coords[0]}`,
   );
