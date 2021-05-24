@@ -67,8 +67,10 @@ const fetchWeatherInfo = async (coords: [number, number]) => {
 };
 
 const fetchAirPollutionInfo = async (coords: [number, number]) => {
+  console.log(coords);
+
   const response = await fetch(
-    `http://localhost:3000/api/air-pollution?coords:${coords[1]};${coords[0]}`,
+    `http://localhost:3000/api/air-pollution/${coords[1]};${coords[0]}`,
   );
 
   const data = await response.json();
