@@ -27,7 +27,7 @@ function* generalSaga() {
  */
 const fetchPlaces = async (userInput: string) => {
   const response = await fetch(
-    `http://localhost:3000/api/location/${userInput}`,
+    `${process.env.NEXT_PUBLIC_API_URL}/api/location/${userInput}`,
   );
 
   const data: mapboxPlaces = await response.json();
@@ -58,7 +58,7 @@ function* watchGetPlaces() {
  */
 const fetchWeatherInfo = async (coords: [number, number]) => {
   const response = await fetch(
-    `http://localhost:3000/api/weather/${coords[1]},${coords[0]}`,
+    `${process.env.NEXT_PUBLIC_API_URL}/api/weather/${coords[1]},${coords[0]}`,
   );
 
   const data = await response.json();
@@ -70,7 +70,7 @@ const fetchAirPollutionInfo = async (coords: [number, number]) => {
   console.log(coords);
 
   const response = await fetch(
-    `http://localhost:3000/api/air-pollution/${coords[1]};${coords[0]}`,
+    `${process.env.NEXT_PUBLIC_API_URL}/api/air-pollution/${coords[1]};${coords[0]}`,
   );
 
   const data = await response.json();
@@ -100,7 +100,9 @@ function* watchGetInfo() {
  * Get info by ip
  */
 const fetchAirPollutionInfoByIp = async () => {
-  const response = await fetch(`http://localhost:3000/api/air-pollution`);
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_API_URL}/api/air-pollution`,
+  );
 
   const data = await response.json();
 

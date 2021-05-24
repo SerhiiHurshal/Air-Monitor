@@ -5,8 +5,6 @@ import { airPollutionInfo } from 'types';
 const handler = nc().get(async (req: NextApiRequest, res: NextApiResponse) => {
   const coords = req.query.coords as string;
 
-  console.log(coords);
-
   const response = await fetch(
     `https://api.waqi.info/feed/geo:${coords}/?token=${process.env.NEXT_PUBLIC_AIR_QUALITY_TOKEN}`,
   );
