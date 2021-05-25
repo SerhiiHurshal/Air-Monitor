@@ -98,3 +98,9 @@
 .selectContainer:focus-within .optionsContainer {
   display: block;
 }
+
+@media (max-width: 522px) {
+  .selectContainer {
+    order: 4;
+  }
+}

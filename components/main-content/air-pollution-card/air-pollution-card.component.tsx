@@ -39,9 +39,9 @@ const AirPollutionCardComponent: FC<Props> = ({
     <p className={styles.status}>{status}</p>
     <div className={styles.aditionalInfoContainer}>
       <p className={styles.aditionalInfo}>{`AQI value: ${aqi}`}</p>
-      <p className={styles.aditionalInfo}>{`Minimum AQI: ${min}`}</p>
-      <p className={styles.aditionalInfo}>{`Maximum AQI: ${max}`}</p>
-      <p className={styles.aditionalInfo}>{`Avarage AQI: ${avg}`}</p>
+      {min && <p className={styles.aditionalInfo}>{`Minimum AQI: ${min}`}</p>}
+      {max && <p className={styles.aditionalInfo}>{`Maximum AQI: ${max}`}</p>}
+      {avg && <p className={styles.aditionalInfo}>{`Avarage AQI: ${avg}`}</p>}
     </div>
   </Card>
 );

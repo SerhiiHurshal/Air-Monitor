@@ -52,9 +52,9 @@ const AirPollutionCard = () => {
   const props = {
     status,
     aqi,
-    avg: forecast.daily.pm25[0].avg,
-    max: forecast.daily.pm25[0].max,
-    min: forecast.daily.pm25[0].min,
+    avg: forecast?.daily?.pm25[0]?.avg,
+    max: forecast?.daily?.pm25[0]?.max,
+    min: forecast?.daily?.pm25[0]?.min,
     cardRef,
   };
 
