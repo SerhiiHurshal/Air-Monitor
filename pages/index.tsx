@@ -12,8 +12,16 @@ const Home = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    const theme = localStorage.getItem('theme');
-    if (theme) dispatch(setTheme(theme));
+    let theme: string;
+    if (localStorage.getItem('theme')) {
+      theme = localStorage.getItem('theme') as string;
+    } else {
+      theme = window.matchMedia('(prefers-color-sheme)').matches
+        ? 'light'
+        : 'dark';
+    }
+
+    dispatch(setTheme(theme));
   }, []);
 
   useEffect(() => {

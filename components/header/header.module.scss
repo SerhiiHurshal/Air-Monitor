@@ -5,6 +5,8 @@
   box-shadow: 0px 8px 10px $shadow-transparent-low;
   background-color: $primary;
   align-items: center;
+  position: relative;
+  z-index: 2;
 
   @include color-change-animation();
 }

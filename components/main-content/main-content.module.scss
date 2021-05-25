@@ -11,7 +11,7 @@
 .infoBlock {
   @include flex(space-around);
   flex-wrap: wrap;
-  background-color: transparent;
+  background-color: $secondary;
   color: $font-color-secondary;
 
   @include color-change-animation();

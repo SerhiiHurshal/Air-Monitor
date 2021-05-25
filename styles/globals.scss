@@ -11,6 +11,18 @@ body {
   transition: background 500ms ease-in-out;
 }
 
+@media (prefers-color-scheme: dark) {
+  body {
+    background-color: #4f4d4d;
+  }
+}
+
+@media (prefers-color-scheme: light) {
+  body {
+    background-color: #fff;
+  }
+}
+
 .light {
   --primary: #fff;
   --secondary: #fff;
