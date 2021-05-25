@@ -10,6 +10,7 @@ interface Props {
 const ThemeSwitcherComponent = ({ theme, onThemeSwitch }: Props) => (
   <div className={styles.container}>
     <button
+      aria-label='button to switch theme'
       className={classNames(
         styles.button,
         {

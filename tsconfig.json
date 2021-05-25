@@ -75,7 +75,8 @@
     "paths": {
       "@components/*": ["components/*"],
       "@images/*": ["public/images/*"],
-      "@redux/*": ["redux/*"]
+      "@redux/*": ["redux/*"],
+      "@shared.scss": ["styles/shared.scss"]
     }
   },
   "include": [
