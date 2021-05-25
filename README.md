@@ -1,6 +1,7 @@
 # Summary
 
-Website that provides information about air pollution and current weather anywhere in the world
+Website that provides information about air pollution and current weather anywhere in the world.
+[Air-monitor](https://air-monitor.vercel.app/)
 
 # Technoligies used
 
@@ -12,7 +13,7 @@ Website that provides information about air pollution and current weather anywhe
 
 - [x] Location search select
 - [x] Cards
-- [ ] Theme switched
+- [x] Theme switched
 - [ ] Saved locations
 - [ ] Weather and air pollution forecast
 - [ ] Air pollution map
