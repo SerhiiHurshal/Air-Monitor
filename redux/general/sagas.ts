@@ -26,8 +26,16 @@ function* generalSaga() {
  * Get Places
  */
 const fetchPlaces = async (userInput: string) => {
+  const fetchData = {
+    location: userInput,
+  };
+
   const response = await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}/api/location/${userInput}`,
+    `${process.env.NEXT_PUBLIC_API_URL}/api/location`,
+    {
+      method: 'POST',
+      body: JSON.stringify(fetchData),
+    },
   );
 
   const data: mapboxPlaces = await response.json();
@@ -38,15 +46,17 @@ const fetchPlaces = async (userInput: string) => {
 function* getPlaces({
   payload,
 }: getPlacesAction): Generator<any, void, mapboxFeature[]> {
-  const places = yield call(fetchPlaces, payload);
+  if (payload) {
+    const places = yield call(fetchPlaces, payload);
 
-  const parsedPlaces = places?.map((feature: mapboxFeature) => ({
-    id: feature.id,
-    name: feature.place_name,
-    center: feature.center,
-  }));
+    const parsedPlaces = places?.map((feature: mapboxFeature) => ({
+      id: feature.id,
+      name: feature.place_name,
+      center: feature.center,
+    }));
 
-  yield put(setPlaces(parsedPlaces));
+    yield put(setPlaces(parsedPlaces));
+  }
 }
 
 function* watchGetPlaces() {
