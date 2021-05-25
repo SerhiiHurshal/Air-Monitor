@@ -21,6 +21,7 @@ const generalReducer = (
     case SET_WEATHER_INFO:
       return { ...state, weatherInfo: action.payload };
     case SET_THEME:
+      localStorage.setItem('theme', action.payload);
       return { ...state, theme: action.payload };
     default:
       return state;

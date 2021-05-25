@@ -3,11 +3,18 @@ import { Header } from '@components/header/header.component';
 import { MainContent } from '@components/main-content/main-content.component';
 import { Footer } from '@components/footer/footer';
 import Head from 'next/head';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { State } from '@redux/state';
+import { setTheme } from '@redux/general/actions';
 
 const Home = () => {
   const { theme } = useSelector((state: State) => state.general);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    const theme = localStorage.getItem('theme');
+    if (theme) dispatch(setTheme(theme));
+  }, []);
 
   useEffect(() => {
     const body = document.getElementsByTagName('body');
