@@ -28,6 +28,7 @@ const Home = () => {
     const body = document.getElementsByTagName('body');
 
     body[0].className = theme;
+    body[0].style.backgroundColor = theme === 'light' ? '#fff' : '#4f4d4d';
   }, [theme]);
 
   return (
