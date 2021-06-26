@@ -16,9 +16,9 @@ const handler = nc().get(async (req: NextApiRequest, res: NextApiResponse) => {
     },
   );
 
-  const data: airPollutionInfo = await response.json();
+  const { data }: airPollutionInfo = await response.json();
 
-  res.status(200).json(data.data);
+  res.status(200).json(data);
 });
 
 export default handler;

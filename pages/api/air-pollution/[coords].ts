@@ -9,9 +9,9 @@ const handler = nc().get(async (req: NextApiRequest, res: NextApiResponse) => {
     `https://api.waqi.info/feed/geo:${coords}/?token=${process.env.NEXT_PUBLIC_AIR_QUALITY_TOKEN}`,
   );
 
-  const data: airPollutionInfo = await response.json();
+  const { data }: airPollutionInfo = await response.json();
 
-  res.status(200).json(data.data);
+  res.status(200).json(data);
 });
 
 export default handler;
