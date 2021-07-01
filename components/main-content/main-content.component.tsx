@@ -20,11 +20,11 @@ const MainContent = () => {
   return (
     <Fragment>
       <section className={styles.infoBlock}>
-        <p className={styles.locationInfo}>
+        <p className={styles.locationInfo} title={selectedPlace?.name}>
           <span className={styles.bold}>Current place:</span>
           {selectedPlace?.name}
         </p>
-        <p className={styles.locationInfo}>
+        <p className={styles.locationInfo} title={airPollutionInfo?.city?.name}>
           <span className={styles.bold}>Nearest station:</span>
           {airPollutionInfo?.city?.name}
         </p>
