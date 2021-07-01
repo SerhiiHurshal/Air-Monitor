@@ -18,7 +18,7 @@ const generalReducer = reducer(new GeneralState())
   .on(getPlaces.success, (state, avaliablePlaces) => {
     state.avaliablePlaces = avaliablePlaces;
   })
-  .on(setSelectedPlace, (state, selectedPlace) => {
+  .on(setSelectedPlace.success, (state, selectedPlace) => {
     state.selectedPlace = selectedPlace;
   })
   .on(setTheme, (state, theme) => {

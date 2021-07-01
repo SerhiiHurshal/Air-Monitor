@@ -1,8 +1,13 @@
-import { AirPollutionInfo, Coords, WeatherInfo } from '@models/client';
+import { AirPollutionInfo, Coords, Place, WeatherInfo } from '@models/client';
 import { Context } from '@redux/store';
 import { Payload, Saga } from 'redux-chill';
 import { all, put, call } from 'redux-saga/effects';
-import { getAirPollutionInfo, getWeatherInfo } from './actions';
+import {
+  getAirPollutionInfo,
+  getWeatherInfo,
+  setSelectedPlace,
+  getPlaces,
+} from './actions';
 
 /**
  * General saga
@@ -36,10 +41,43 @@ class GeneralSaga {
       call(fetchWeatherInfo, parsedCoords),
     ]);
 
+    const place: Place = {
+      id: airPollutionInfo.idx.toString(),
+      name: airPollutionInfo.city.name,
+      center: {
+        latitude: +airPollutionInfo.city.geo[0],
+        longitude: +airPollutionInfo.city.geo[1],
+      },
+    };
+
     yield all([
       put(getWeatherInfo.success(weatherInfo)),
       put(getAirPollutionInfo.success(airPollutionInfo)),
+      put(setSelectedPlace.success(place)),
     ]);
+  }
+
+  /**
+   * Get predicted places
+   */
+  @Saga(getPlaces)
+  public *getPlaces(
+    userInput: Payload<typeof getPlaces>,
+    { api: { fetchPlaces } }: Context,
+  ) {
+    const places: Place[] = yield call(fetchPlaces, userInput);
+
+    yield put(getPlaces.success(places));
+  }
+
+  /**
+   * Get predicted places
+   */
+  @Saga(setSelectedPlace)
+  public *setSelectedPlace(place: Payload<typeof setSelectedPlace>) {
+    yield put(getWeatherInfo(place.center));
+
+    yield put(setSelectedPlace.success(place));
   }
 }
 

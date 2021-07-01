@@ -1,20 +1,20 @@
-import { ChangeEvent, MouseEvent, RefObject } from 'react';
-import { place } from 'models/types';
+import { ChangeEvent, MouseEvent } from 'react';
+import { Place } from '@models/client';
 
 import styles from './location-select.module.scss';
 
 interface LocationSelectComponentProps {
-  options: place[];
+  options: Place[];
   onInputChange: (e: ChangeEvent<HTMLInputElement>) => void;
   onOptionSelect: (e: MouseEvent<HTMLButtonElement>) => void;
-  input: RefObject<HTMLInputElement>;
+  locationInputValue: string;
 }
 
 const LocationSelectComponent = ({
   options,
   onInputChange,
   onOptionSelect,
-  input,
+  locationInputValue,
 }: LocationSelectComponentProps) => (
   <div className={styles.selectContainer}>
     <input
@@ -22,7 +22,7 @@ const LocationSelectComponent = ({
       onChange={onInputChange}
       className={styles.input}
       placeholder='Find...'
-      ref={input}
+      value={locationInputValue}
     />
     <div className={styles.optionsContainer}>
       {options?.length ? (

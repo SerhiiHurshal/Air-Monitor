@@ -41,9 +41,9 @@ const Home = () => {
           content='Information about air pollution and current weather anywhere in the world'
         />
       </Head>
-      {/* <Header /> */}
+      <Header />
       <MainContent />
-      {/* <Footer /> */}
+      <Footer />
     </Fragment>
   );
 };

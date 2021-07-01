@@ -19,9 +19,9 @@ const getPlaces = make('[general] get places')
   .stage((userInput: string) => userInput)
   .stage('success', (places: Place[]) => places);
 
-const setSelectedPlace = make('[general] set selected place').stage(
-  (place: Place) => place,
-);
+const setSelectedPlace = make('[general] set selected place')
+  .stage((place: Place) => place)
+  .stage('success', (place: Place) => place);
 
 const setTheme = make('[general] set theme').stage((theme: Theme) => theme);
 

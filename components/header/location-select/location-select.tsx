@@ -1,15 +1,16 @@
-import { ChangeEvent, MouseEvent, useRef } from 'react';
+import { ChangeEvent, MouseEvent, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getPlaces, setPlaces, setSelectedPlace } from 'redux/general/actions';
+import { getPlaces, setSelectedPlace } from 'redux/general/actions';
 import { LocationSelectComponent } from './location-select.component';
 import { State } from '../../../redux/state';
 
 const LocationSelect = () => {
   const dispatch = useDispatch();
   const { avaliablePlaces } = useSelector((state: State) => state.general);
-  const input = useRef<HTMLInputElement>(null);
+  const [locationInputValue, setLocationInputValue] = useState('');
 
   const onInputChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setLocationInputValue(e.target.value);
     dispatch(getPlaces(e.target.value));
   };
 
@@ -24,11 +25,8 @@ const LocationSelect = () => {
       const activeElement = document.activeElement as HTMLElement;
       activeElement.blur();
     }
-
-    if (input.current) {
-      input.current.value = '';
-      dispatch(setPlaces([]));
-    }
+    setLocationInputValue('');
+    dispatch(getPlaces.success([]));
   };
 
   return (
@@ -36,7 +34,7 @@ const LocationSelect = () => {
       options={avaliablePlaces}
       onInputChange={onInputChange}
       onOptionSelect={onOptionSelect}
-      input={input}
+      locationInputValue={locationInputValue}
     />
   );
 };
