@@ -6,15 +6,16 @@ import Head from 'next/head';
 import { useDispatch, useSelector } from 'react-redux';
 import { State } from '@redux/state';
 import { setTheme } from '@redux/general/actions';
+import { Theme } from '@models/client';
 
 const Home = () => {
   const { theme } = useSelector((state: State) => state.general);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    let theme: string;
+    let theme: Theme;
     if (localStorage.getItem('theme')) {
-      theme = localStorage.getItem('theme') as string;
+      theme = localStorage.getItem('theme') as Theme;
     } else {
       theme = window.matchMedia('(prefers-color-sheme)').matches
         ? 'light'
@@ -40,9 +41,9 @@ const Home = () => {
           content='Information about air pollution and current weather anywhere in the world'
         />
       </Head>
-      <Header />
+      {/* <Header /> */}
       <MainContent />
-      <Footer />
+      {/* <Footer /> */}
     </Fragment>
   );
 };

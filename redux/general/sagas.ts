@@ -1,145 +1,46 @@
-import { all, takeLatest, put, call, takeEvery } from 'redux-saga/effects';
-import {
-  airPollutionInfoData,
-  getPlacesAction,
-  mapboxFeature,
-  mapboxPlaces,
-  setSelectedPlaceAction,
-  weatherInfo,
-} from 'types';
-import { GET_INFO_BY_IP, GET_PLACES, SET_CURRENT_PLACE } from './action-types';
-import {
-  setAirPollutionInfo,
-  setPlaces,
-  setSelectedPlace,
-  setWeatherInfo,
-} from './actions';
+import { AirPollutionInfo, Coords, WeatherInfo } from '@models/client';
+import { Context } from '@redux/store';
+import { Payload, Saga } from 'redux-chill';
+import { all, put, call } from 'redux-saga/effects';
+import { getAirPollutionInfo, getWeatherInfo } from './actions';
 
 /**
  * General saga
  */
-function* generalSaga() {
-  yield all([watchGetPlaces(), watchGetInfo(), watchGetInfoByIp()]);
-}
-
-/**
- * Get Places
- */
-const fetchPlaces = async (userInput: string) => {
-  const fetchData = {
-    location: userInput,
-  };
-
-  const response = await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}/api/location`,
+class GeneralSaga {
+  /**
+   * Get weather info
+   */
+  @Saga(getWeatherInfo)
+  public *getWeatherInfo(
+    coords: Payload<typeof getWeatherInfo>,
     {
-      method: 'POST',
-      body: JSON.stringify(fetchData),
-    },
-  );
+      api: { fetchAirPollutionInfo, fetchWeatherInfo, fetchUserCoords },
+    }: Context,
+  ) {
+    let parsedCoords = coords as Coords;
 
-  const data: mapboxPlaces = await response.json();
+    //get user current coords from IP
+    if (!coords) {
+      const coords: Coords = yield call(fetchUserCoords);
+      parsedCoords = coords.latitude
+        ? coords
+        : { latitude: 51.5, longitude: 0.1 };
+    }
 
-  return data;
-};
+    const [airPollutionInfo, weatherInfo]: [
+      AirPollutionInfo,
+      WeatherInfo,
+    ] = yield all([
+      call(fetchAirPollutionInfo, parsedCoords),
+      call(fetchWeatherInfo, parsedCoords),
+    ]);
 
-function* getPlaces({
-  payload,
-}: getPlacesAction): Generator<any, void, mapboxFeature[]> {
-  if (payload) {
-    const places = yield call(fetchPlaces, payload);
-
-    const parsedPlaces = places?.map((feature: mapboxFeature) => ({
-      id: feature.id,
-      name: feature.place_name,
-      center: feature.center,
-    }));
-
-    yield put(setPlaces(parsedPlaces));
+    yield all([
+      put(getWeatherInfo.success(weatherInfo)),
+      put(getAirPollutionInfo.success(airPollutionInfo)),
+    ]);
   }
 }
 
-function* watchGetPlaces() {
-  yield takeLatest(GET_PLACES, getPlaces);
-}
-
-/**
- * Get info
- */
-const fetchWeatherInfo = async (coords: [number, number]) => {
-  const response = await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}/api/weather/${coords[1]},${coords[0]}`,
-  );
-
-  const data = await response.json();
-
-  return data;
-};
-
-const fetchAirPollutionInfo = async (coords: [number, number]) => {
-  const response = await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}/api/air-pollution/${coords[1]};${coords[0]}`,
-  );
-
-  const data = await response.json();
-
-  return data;
-};
-
-function* getInfo(action: setSelectedPlaceAction): Generator<any, void, any> {
-  const airPollutionInfo: airPollutionInfoData = yield call(
-    fetchAirPollutionInfo,
-    action.payload.center,
-  );
-  const weatherInfo: weatherInfo = yield call(
-    fetchWeatherInfo,
-    action.payload.center,
-  );
-
-  yield put(setWeatherInfo(weatherInfo));
-  yield put(setAirPollutionInfo(airPollutionInfo));
-}
-
-function* watchGetInfo() {
-  yield takeEvery(SET_CURRENT_PLACE, getInfo);
-}
-
-/**
- * Get info by ip
- */
-const fetchAirPollutionInfoByIp = async () => {
-  const response = await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}/api/air-pollution`,
-  );
-
-  const data = await response.json();
-
-  return data;
-};
-
-function* getInfoByIp(): Generator<any, void, any> {
-  const airPollutionInfo: airPollutionInfoData = yield call(
-    fetchAirPollutionInfoByIp,
-  );
-
-  const place = {
-    id: airPollutionInfo.idx.toString(),
-    name: airPollutionInfo.city.name,
-    center: airPollutionInfo.city.geo
-      .map((coord: string) => Number(coord))
-      .reverse() as [number, number],
-  };
-
-  const weatherInfo: weatherInfo = yield call(fetchWeatherInfo, place.center);
-
-  yield put(setAirPollutionInfo(airPollutionInfo));
-  yield put(setWeatherInfo(weatherInfo));
-
-  yield put(setSelectedPlace(place));
-}
-
-function* watchGetInfoByIp() {
-  yield takeLatest(GET_INFO_BY_IP, getInfoByIp);
-}
-
-export { generalSaga };
+export { GeneralSaga };

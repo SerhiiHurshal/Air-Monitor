@@ -1,7 +1,7 @@
 import { Fragment, useEffect } from 'react';
 import { State } from '@redux/state';
 import { useDispatch, useSelector } from 'react-redux';
-import { getAirPollutionByIp } from '@redux/general/actions';
+import { getWeatherInfo } from '@redux/general/actions';
 import { WeatherCard } from './weather-card/weather-card';
 import { AirPollutionCard } from './air-pollution-card/air-pollution-card';
 
@@ -14,7 +14,7 @@ const MainContent = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getAirPollutionByIp());
+    dispatch(getWeatherInfo());
   }, []);
 
   return (
@@ -26,7 +26,7 @@ const MainContent = () => {
         </p>
         <p className={styles.locationInfo}>
           <span className={styles.bold}>Nearest station:</span>
-          {airPollutionInfo?.city.name}
+          {airPollutionInfo?.city?.name}
         </p>
       </section>
       <section className={styles.cardsContainer}>

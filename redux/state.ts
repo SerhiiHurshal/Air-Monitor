@@ -1,8 +1,12 @@
-import { app } from './rootReducer';
+import { GeneralState } from './general/state';
+
+const general = new GeneralState();
 
 /**
  * App state
  */
-type State = ReturnType<typeof app>;
+type State = {
+  general: typeof general;
+};
 
 export type { State };

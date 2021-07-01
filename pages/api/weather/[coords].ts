@@ -1,6 +1,6 @@
 import nc from 'next-connect';
 import type { NextApiRequest, NextApiResponse } from 'next';
-import { weatherInfo } from 'types';
+import { weatherInfo } from '@models/api';
 
 const handler = nc().get(async (req: NextApiRequest, res: NextApiResponse) => {
   const coords = req.query.coords as string;

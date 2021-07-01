@@ -1,6 +1,6 @@
 import nc from 'next-connect';
 import type { NextApiRequest, NextApiResponse } from 'next';
-import { mapboxPlaces } from 'types';
+import { mapboxPlaces } from '@models/api';
 
 const handler = nc().post(async (req: NextApiRequest, res: NextApiResponse) => {
   const data = req.body;

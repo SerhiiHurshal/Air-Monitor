@@ -1,8 +1,12 @@
 import createSagaMiddleware from 'redux-saga';
-import { createStore as reduxCreateStore, applyMiddleware } from 'redux';
+import { createStore as reduxCreateStore, applyMiddleware, Store } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
+import { run } from 'redux-chill';
 import { app } from './rootReducer';
-import { rootSaga } from './rootSaga';
+import { sagas } from './sagas';
+import * as api from '@api-services';
+
+type Context = {store: Store, api: typeof api}
 
 /**
  * Create redux store
@@ -13,9 +17,11 @@ const createStore = () => {
 
   const store = reduxCreateStore(app, composeWithDevTools(applied));
 
-  sagaMiddleware.run(rootSaga);
+  run(sagaMiddleware, sagas, { store, api });
 
   return store;
 };
 
-export { createStore };
+export { createStore };  
+export type { Context };
+

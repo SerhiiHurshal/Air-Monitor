@@ -1,5 +1,5 @@
 import { ChangeEvent, MouseEvent, RefObject } from 'react';
-import { place } from 'types';
+import { place } from 'models/types';
 
 import styles from './location-select.module.scss';
 

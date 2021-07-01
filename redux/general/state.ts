@@ -1,4 +1,4 @@
-import { airPollutionInfoData, place, weatherInfo } from 'types';
+import { Place, Theme, AirPollutionInfo, WeatherInfo } from '@models/client';
 
 /**
  * General state
@@ -7,17 +7,17 @@ class GeneralState {
   /**
    * Current place
    */
-  public selectedPlace: place | null = null;
+  public selectedPlace: Place | null = null;
 
   /**
    * Avaliable places
    */
-  public avaliablePlaces: place[] = [];
+  public avaliablePlaces: Place[] = [];
 
   /**
    * Air pollution info
    */
-  public airPollutionInfo: airPollutionInfoData = {
+  public airPollutionInfo: AirPollutionInfo = {
     idx: 0,
     aqi: 0,
     time: {
@@ -58,7 +58,7 @@ class GeneralState {
   /**
    * Weather info
    */
-  public weatherInfo: weatherInfo = {
+  public weatherInfo: WeatherInfo = {
     location: {
       name: 'loading...',
       region: 'loading...',
@@ -103,7 +103,7 @@ class GeneralState {
   /**
    * Theme
    */
-  public theme: 'light' | 'dark' = 'light';
+  public theme: Theme = 'light';
 }
 
 export { GeneralState };

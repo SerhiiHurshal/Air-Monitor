@@ -1,54 +1,34 @@
-import { airPollutionInfoData, place, weatherInfo } from 'types';
 import {
-  GET_INFO_BY_IP,
-  GET_PLACES,
-  SET_CURRENT_PLACE,
-  SET_PLACES,
-  SET_AIR_POLLUTION_INFO,
-  SET_WEATHER_INFO,
-  SET_THEME,
-} from './action-types';
+  AirPollutionInfo,
+  Coords,
+  Place,
+  Theme,
+  WeatherInfo,
+} from '@models/client';
+import { make } from 'redux-chill';
 
-const getPlaces = (userInput: string) => ({
-  type: GET_PLACES,
-  payload: userInput,
-});
+const getWeatherInfo = make('[general] get weather info')
+  .stage((coords?: Coords) => coords)
+  .stage('success', (weatherInfo: WeatherInfo) => weatherInfo);
 
-const setPlaces = (places: place[]) => ({
-  type: SET_PLACES,
-  payload: places,
-});
+const getAirPollutionInfo = make('[general] get air pollution info')
+  .stage((coords: Coords) => coords)
+  .stage('success', (apiPollutionInfo: AirPollutionInfo) => apiPollutionInfo);
 
-const setSelectedPlace = (place: place) => ({
-  type: SET_CURRENT_PLACE,
-  payload: place,
-});
+const getPlaces = make('[general] get places')
+  .stage((userInput: string) => userInput)
+  .stage('success', (places: Place[]) => places);
 
-const getAirPollutionByIp = () => ({
-  type: GET_INFO_BY_IP,
-});
+const setSelectedPlace = make('[general] set selected place').stage(
+  (place: Place) => place,
+);
 
-const setAirPollutionInfo = (airPollutionInfo: airPollutionInfoData) => ({
-  type: SET_AIR_POLLUTION_INFO,
-  payload: airPollutionInfo,
-});
-
-const setWeatherInfo = (airPollutionInfo: weatherInfo) => ({
-  type: SET_WEATHER_INFO,
-  payload: airPollutionInfo,
-});
-
-const setTheme = (theme: string) => ({
-  type: SET_THEME,
-  payload: theme,
-});
+const setTheme = make('[general] set theme').stage((theme: Theme) => theme);
 
 export {
+  getWeatherInfo,
+  getAirPollutionInfo,
   getPlaces,
   setSelectedPlace,
-  setPlaces,
-  getAirPollutionByIp,
-  setAirPollutionInfo,
-  setWeatherInfo,
   setTheme,
 };
