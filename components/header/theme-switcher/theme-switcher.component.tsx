@@ -1,5 +1,5 @@
+import { Theme } from '@models/client';
 import classNames from 'classnames';
-import { themeVariants } from './theme-switcher';
 import styles from './theme-switcher.module.scss';
 
 interface Props {
@@ -14,10 +14,10 @@ const ThemeSwitcherComponent = ({ theme, onThemeSwitch }: Props) => (
       className={classNames(
         styles.button,
         {
-          [styles.buttonLight]: theme !== themeVariants.dark.toString(),
+          [styles.buttonLight]: theme !== Theme.dark.toString(),
         },
         {
-          [styles.buttonDark]: theme === themeVariants.dark.toString(),
+          [styles.buttonDark]: theme === Theme.dark.toString(),
         },
       )}
       onClick={onThemeSwitch}

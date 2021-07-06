@@ -1,22 +1,16 @@
-import { setTheme } from '@redux/general/actions';
+import { setTheme } from '@redux/ui/actions';
 import { State } from '@redux/state';
 import { useDispatch, useSelector } from 'react-redux';
 import { ThemeSwitcherComponent } from './theme-switcher.component';
-
-export enum themeVariants {
-  light = 'light',
-  dark = 'dark',
-}
+import { Theme } from '@models/client';
 
 const ThemeSwitcher = () => {
-  const { theme } = useSelector((state: State) => state.general);
+  const { theme } = useSelector((state: State) => state.ui);
   const dispatch = useDispatch();
 
   const onThemeSwitch = () => {
     const newTheme =
-      theme === themeVariants.light.toString()
-        ? themeVariants.dark
-        : themeVariants.light;
+      theme === Theme.light.toString() ? Theme.dark : Theme.light;
 
     dispatch(setTheme(newTheme));
   };
@@ -24,7 +18,7 @@ const ThemeSwitcher = () => {
   const props = {
     theme,
     onThemeSwitch,
-    themeVariants,
+    Theme,
   };
 
   return <ThemeSwitcherComponent {...props} />;

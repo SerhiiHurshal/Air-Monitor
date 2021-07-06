@@ -5,7 +5,6 @@ import {
   getWeatherInfo,
   getPlaces,
   setSelectedPlace,
-  setTheme,
 } from './actions';
 
 const generalReducer = reducer(new GeneralState())
@@ -20,9 +19,6 @@ const generalReducer = reducer(new GeneralState())
   })
   .on(setSelectedPlace.success, (state, selectedPlace) => {
     state.selectedPlace = selectedPlace;
-  })
-  .on(setTheme, (state, theme) => {
-    state.theme = theme;
   });
 
 export { generalReducer };

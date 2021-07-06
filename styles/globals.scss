@@ -33,6 +33,7 @@ body {
   --shadow-transparent: rgba(0, 0, 0, 0.2);
   --shadow-transparent-high: rgba(0, 0, 0, 0.3);
   --select-hover-color: #f1f1f1;
+  --card-loading-color: rgb(185, 185, 185);
 }
 
 .dark {
@@ -45,4 +46,5 @@ body {
   --shadow-transparent: rgba(0, 0, 0, 0.2);
   --shadow-transparent-high: rgba(0, 0, 0, 0.3);
   --select-hover-color: #555;
+  --card-loading-color: #c4c4c473;
 }

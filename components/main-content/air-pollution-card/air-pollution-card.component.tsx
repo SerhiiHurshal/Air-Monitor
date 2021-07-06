@@ -1,5 +1,5 @@
 import { Card } from '@components/card/card';
-import { FC, RefObject } from 'react';
+import { FC } from 'react';
 
 import LoadingIcon from '@images/loading.svg';
 import GreenFace from '@images/face_icons/ic-face-green.svg';
@@ -17,7 +17,7 @@ interface Props {
   avg: number;
   max: number;
   min: number;
-  cardRef: RefObject<HTMLDivElement>;
+  shadow: string;
 }
 
 const AirPollutionCardComponent: FC<Props> = ({
@@ -26,9 +26,9 @@ const AirPollutionCardComponent: FC<Props> = ({
   min,
   max,
   avg,
-  cardRef,
+  shadow,
 }) => (
-  <Card title='Air Pollution' innerRef={cardRef}>
+  <Card title='Air Pollution' shadow={shadow}>
     {aqi > 0 && aqi < 51 && <GreenFace className={styles.icon} />}
     {aqi < 101 && aqi > 50 && <YellowFace className={styles.icon} />}
     {aqi < 151 && aqi > 100 && <OrangeFace className={styles.icon} />}

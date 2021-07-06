@@ -1,5 +1,6 @@
 import { AirPollutionInfo, Coords, Place, WeatherInfo } from '@models/client';
 import { Context } from '@redux/store';
+import { setCardLoading, setSearchLoading } from '@redux/ui/actions';
 import { Payload, Saga } from 'redux-chill';
 import { all, put, call } from 'redux-saga/effects';
 import {
@@ -24,6 +25,8 @@ class GeneralSaga {
     }: Context,
   ) {
     let parsedCoords = coords as Coords;
+
+    yield put(setCardLoading(true));
 
     //get user current coords from IP
     if (!coords) {
@@ -55,6 +58,8 @@ class GeneralSaga {
       put(getAirPollutionInfo.success(airPollutionInfo)),
       put(setSelectedPlace.success(place)),
     ]);
+
+    yield put(setCardLoading(false));
   }
 
   /**
@@ -65,13 +70,17 @@ class GeneralSaga {
     userInput: Payload<typeof getPlaces>,
     { api: { fetchPlaces } }: Context,
   ) {
+    yield put(setSearchLoading(true));
+
     const places: Place[] = yield call(fetchPlaces, userInput);
 
     yield put(getPlaces.success(places));
+
+    yield put(setSearchLoading(false));
   }
 
   /**
-   * Get predicted places
+   * Set selected place
    */
   @Saga(setSelectedPlace)
   public *setSelectedPlace(place: Payload<typeof setSelectedPlace>) {

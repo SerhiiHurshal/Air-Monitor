@@ -1,13 +1,15 @@
-import { ChangeEvent, MouseEvent } from 'react';
+import { ChangeEvent, Fragment, MouseEvent } from 'react';
 import { Place } from '@models/client';
 
 import styles from './location-select.module.scss';
+import classNames from 'classnames';
 
 interface LocationSelectComponentProps {
   options: Place[];
   onInputChange: (e: ChangeEvent<HTMLInputElement>) => void;
   onOptionSelect: (e: MouseEvent<HTMLButtonElement>) => void;
   locationInputValue: string;
+  isSearchLoading: boolean;
 }
 
 const LocationSelectComponent = ({
@@ -15,6 +17,7 @@ const LocationSelectComponent = ({
   onInputChange,
   onOptionSelect,
   locationInputValue,
+  isSearchLoading,
 }: LocationSelectComponentProps) => (
   <div className={styles.selectContainer}>
     <input
@@ -24,20 +27,32 @@ const LocationSelectComponent = ({
       placeholder='Find...'
       value={locationInputValue}
     />
-    <div className={styles.optionsContainer}>
-      {options?.length ? (
-        options.map((place) => (
-          <button
-            key={place.id}
-            className={styles.option}
-            onClick={onOptionSelect}
-            data-info={JSON.stringify(place)}
-          >
-            {place.name}
-          </button>
-        ))
+    <div
+      className={classNames(styles.optionsContainer, {
+        [`${styles.optionsContainerWithoutScroll}`]: isSearchLoading,
+      })}
+    >
+      {isSearchLoading ? (
+        <div className={styles.loaderWrapper}>
+          <div className={styles.loader}></div>
+        </div>
       ) : (
-        <button className={styles.option}>No places found</button>
+        <Fragment>
+          {options?.length ? (
+            options.map((place) => (
+              <button
+                key={place.id}
+                className={styles.option}
+                onClick={onOptionSelect}
+                data-info={JSON.stringify(place)}
+              >
+                {place.name}
+              </button>
+            ))
+          ) : (
+            <button className={styles.option}>No places found</button>
+          )}
+        </Fragment>
       )}
     </div>
   </div>

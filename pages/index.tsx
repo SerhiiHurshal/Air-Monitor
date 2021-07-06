@@ -5,11 +5,11 @@ import { Footer } from '@components/footer/footer';
 import Head from 'next/head';
 import { useDispatch, useSelector } from 'react-redux';
 import { State } from '@redux/state';
-import { setTheme } from '@redux/general/actions';
 import { Theme } from '@models/client';
+import { setTheme } from '@redux/ui/actions';
 
 const Home = () => {
-  const { theme } = useSelector((state: State) => state.general);
+  const { theme } = useSelector((state: State) => state.ui);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -18,8 +18,8 @@ const Home = () => {
       theme = localStorage.getItem('theme') as Theme;
     } else {
       theme = window.matchMedia('(prefers-color-sheme)').matches
-        ? 'light'
-        : 'dark';
+        ? Theme.light
+        : Theme.dark;
     }
 
     dispatch(setTheme(theme));

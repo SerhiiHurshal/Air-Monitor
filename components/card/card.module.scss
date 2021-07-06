@@ -20,6 +20,7 @@
   color: $font-color-primary;
   margin: 0;
 
+  @include opacity-animation();
   @include color-change-animation();
 }
 
@@ -28,13 +29,42 @@
   @include flex(flex-start, center, column);
   max-height: 100%;
   width: 100%;
+  animation: Opacity 1s ease-in-out;
 }
 
 .footer {
   height: 4rem;
   border-top: 1px solid $divider-color-primary;
+  animation: Opacity 1s ease-in-out;
 
   @include color-change-animation();
+}
+
+.animatedBackground {
+  border-radius: 1rem;
+  background: linear-gradient(
+    89deg,
+    $secondary,
+    $card-loading-color,
+    $secondary
+  );
+  background-size: 600% 600%;
+  height: 100%;
+  width: 100%;
+
+  animation: backgroundLoadingAnimation 10s ease infinite;
+}
+
+@keyframes backgroundLoadingAnimation {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
 }
 
 @media (max-width: 864px) and (max-height: 650px) {

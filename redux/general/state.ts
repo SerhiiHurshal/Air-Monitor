@@ -1,4 +1,4 @@
-import { Place, Theme, AirPollutionInfo, WeatherInfo } from '@models/client';
+import { Place, AirPollutionInfo, WeatherInfo } from '@models/client';
 
 /**
  * General state
@@ -99,11 +99,6 @@ class GeneralState {
       gust_kph: 0,
     },
   };
-
-  /**
-   * Theme
-   */
-  public theme: Theme = 'light';
 }
 
 export { GeneralState };

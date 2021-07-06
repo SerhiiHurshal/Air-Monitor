@@ -25,6 +25,12 @@
   padding: 0 0.5rem;
   margin: 1.5rem 0;
   cursor: help;
+  opacity: 0;
+}
+
+.locationInfoVisible {
+  @include opacity-animation();
+  opacity: 1;
 }
 
 .bold {

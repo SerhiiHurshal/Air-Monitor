@@ -7,11 +7,15 @@ import { State } from '../../../redux/state';
 const LocationSelect = () => {
   const dispatch = useDispatch();
   const { avaliablePlaces } = useSelector((state: State) => state.general);
+  const { isSearchLoading } = useSelector((state: State) => state.ui);
   const [locationInputValue, setLocationInputValue] = useState('');
 
   const onInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     setLocationInputValue(e.target.value);
-    dispatch(getPlaces(e.target.value));
+
+    if (e.target.value) {
+      dispatch(getPlaces(e.target.value));
+    }
   };
 
   const onOptionSelect = (e: MouseEvent<HTMLButtonElement>) => {
@@ -35,6 +39,7 @@ const LocationSelect = () => {
       onInputChange={onInputChange}
       onOptionSelect={onOptionSelect}
       locationInputValue={locationInputValue}
+      isSearchLoading={isSearchLoading}
     />
   );
 };

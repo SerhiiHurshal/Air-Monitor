@@ -122,4 +122,7 @@ export interface AirPollutionInfo {
   };
 }
 
-export type Theme = 'light' | 'dark';
+export enum Theme {
+  light = 'light',
+  dark = 'dark',
+}
