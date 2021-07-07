@@ -1,7 +1,13 @@
 import { Card } from '@components/card/card';
-import LoadingIcon from '@images/loading.svg';
+import { FC } from 'react';
 
 import styles from './weather-card.module.scss';
+
+import {
+  IconNumber,
+  Time,
+  WeatherIcons,
+} from '@components/weather-icons/weather-icons';
 
 interface Props {
   temp_c: number;
@@ -9,39 +15,36 @@ interface Props {
   humidity: number;
   windSpeed: number;
   wind_degree: number;
-  icon: string;
+  imageParametrs: {
+    time: Time;
+    number: IconNumber;
+  };
 }
 
-const WeatherCardComponent = ({
+const WeatherCardComponent: FC<Props> = ({
   temp_c,
   pressure_mb,
   humidity,
   windSpeed,
   wind_degree,
-  icon,
-}: Props) => (
-  <Card title='Weather'>
-    {icon ? (
-      <img
-        src={icon}
-        className={styles.icon}
-        width={128}
-        height={128}
-        alt='weather icon'
-      />
-    ) : (
-      <LoadingIcon />
-    )}
-    <p className={styles.status}>{`${temp_c}°C`}</p>
-    <div className={styles.aditionalInfoContainer}>
-      <p className={styles.aditionalInfo}>{`Pressure: ${pressure_mb} hPa`}</p>
-      <p className={styles.aditionalInfo}>{`Humidity: ${humidity}%`} </p>
-      <p className={styles.aditionalInfo}>{`Wind speed: ${windSpeed} m/s`}</p>
-      <p className={styles.aditionalInfo}>
-        {`Wind direction: ${wind_degree}°`}
-      </p>
-    </div>
-  </Card>
-);
+  imageParametrs,
+}) => {
+  const WeatherIcon = WeatherIcons[imageParametrs.time][imageParametrs.number];
+
+  return (
+    <Card title='Weather'>
+      <WeatherIcon className={styles.icon} />
+      <p className={styles.status}>{`${temp_c}°C`}</p>
+      <div className={styles.aditionalInfoContainer}>
+        <p className={styles.aditionalInfo}>{`Pressure: ${pressure_mb} hPa`}</p>
+        <p className={styles.aditionalInfo}>{`Humidity: ${humidity}%`} </p>
+        <p className={styles.aditionalInfo}>{`Wind speed: ${windSpeed} m/s`}</p>
+        <p className={styles.aditionalInfo}>
+          {`Wind direction: ${wind_degree}°`}
+        </p>
+      </div>
+    </Card>
+  );
+};
 
 export { WeatherCardComponent };

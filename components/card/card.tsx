@@ -6,21 +6,19 @@ import styles from './card.module.scss';
 
 interface CardProps {
   title: string;
-  shadow: string;
+  shadow?: string;
 }
 
 const Card: FC<CardProps> = ({ title, children, shadow }) => {
   const { isCardLoading } = useSelector((state: State) => state.ui);
 
   return (
-    <div className={styles.card}>
+    <div className={styles.card} style={{ boxShadow: shadow }}>
       {isCardLoading ? (
         <div className={styles.animatedBackground}></div>
       ) : (
         <Fragment>
-          <h2 className={styles.title} style={{ boxShadow: shadow }}>
-            {title}
-          </h2>
+          <h2 className={styles.title}>{title}</h2>
           <main className={styles.content}>{children}</main>
           <footer className={styles.footer} />
         </Fragment>
