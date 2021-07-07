@@ -1,6 +1,6 @@
 import nc from 'next-connect';
 import type { NextApiRequest, NextApiResponse } from 'next';
-import { airPollutionInfo } from 'models/types';
+import { airPollutionInfo } from '@models/api';
 
 const handler = nc().get(async (req: NextApiRequest, res: NextApiResponse) => {
   const ip =
