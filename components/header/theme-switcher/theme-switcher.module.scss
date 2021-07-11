@@ -9,25 +9,23 @@
 
 .button {
   background-color: transparent;
+  display: flex;
   border-radius: 50%;
   border: none;
-
-  &::before {
-    font-size: 1.5rem;
-    position: absolute;
-  }
 }
 
-.buttonLight::before {
-  transform: translate(0, -50%);
-  content: '\01F31E';
-  transition: transform 0.5s ease-in-out;
+.buttonDark,
+.buttonLight {
+  position: relative;
+  transition: all 0.5s ease-in-out;
 }
 
-.buttonDark::before {
-  transform: translate(90%, -50%);
-  content: '\01F311';
-  transition: transform 0.5s ease-in-out;
+.buttonLight {
+  left: 30px;
+}
+
+.buttonDark {
+  left: 70px;
 }
 
 .line {
