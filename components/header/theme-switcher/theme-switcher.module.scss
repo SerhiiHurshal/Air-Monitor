@@ -11,23 +11,27 @@
   background-color: transparent;
   border-radius: 50%;
   border: none;
+}
 
-  &::before {
-    font-size: 1.5rem;
-    position: absolute;
-  }
+.buttonDark,
+.buttonLight {
+  font-size: 1.5rem;
+}
+
+.buttonDark::before,
+.buttonLight::before {
+  position: relative;
+  transition: all 0.5s ease-in-out;
 }
 
 .buttonLight::before {
-  transform: translate(0, -50%);
   content: '\01F31E';
-  transition: transform 0.5s ease-in-out;
+  left: 1.7rem;
 }
 
 .buttonDark::before {
-  transform: translate(90%, -50%);
   content: '\01F311';
-  transition: transform 0.5s ease-in-out;
+  left: 4rem;
 }
 
 .line {

@@ -14,10 +14,10 @@ const ThemeSwitcherComponent = ({ theme, onThemeSwitch }: Props) => (
       className={classNames(
         styles.button,
         {
-          [styles.buttonLight]: theme !== Theme.dark.toString(),
+          [styles.buttonLight]: theme === Theme.light,
         },
         {
-          [styles.buttonDark]: theme === Theme.dark.toString(),
+          [styles.buttonDark]: theme !== Theme.light,
         },
       )}
       onClick={onThemeSwitch}
