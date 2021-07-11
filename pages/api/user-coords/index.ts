@@ -8,8 +8,6 @@ const handler = nc().get(async (req: NextApiRequest, res: NextApiResponse) => {
     req.socket.remoteAddress ||
     req.headers['x-real-ip'];
 
-  console.log(ip);
-
   const response = await fetch(
     `http://api.ipstack.com/${ip}?access_key=${process.env.NEXT_PUBLIC_APISTACK_TOKEN}`,
   );
