@@ -2,7 +2,7 @@ import { ChangeEvent, MouseEvent, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getPlaces, setSelectedPlace } from 'redux/general/actions';
 import { LocationSelectComponent } from './location-select.component';
-import { State } from '../../../redux/state';
+import { State } from '@redux/state';
 
 const LocationSelect = () => {
   const dispatch = useDispatch();
@@ -20,6 +20,7 @@ const LocationSelect = () => {
 
   const onOptionSelect = (e: MouseEvent<HTMLButtonElement>) => {
     e.stopPropagation();
+    e.preventDefault();
     if (e.currentTarget.dataset.info) {
       const place = JSON.parse(e.currentTarget.dataset.info);
 
