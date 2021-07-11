@@ -27,32 +27,20 @@ const LocationSelectComponent = ({
       placeholder='Find...'
       value={locationInputValue}
     />
-    <div
-      className={classNames(styles.optionsContainer, {
-        [`${styles.optionsContainerWithoutScroll}`]: isSearchLoading,
-      })}
-    >
-      {isSearchLoading ? (
-        <div className={styles.loaderWrapper}>
-          <div className={styles.loader}></div>
-        </div>
+    <div className={styles.optionsContainer}>
+      {options?.length ? (
+        options.map((place) => (
+          <button
+            key={place.id}
+            className={styles.option}
+            onClick={onOptionSelect}
+            data-info={JSON.stringify(place)}
+          >
+            {place.name}
+          </button>
+        ))
       ) : (
-        <Fragment>
-          {options?.length ? (
-            options.map((place) => (
-              <button
-                key={place.id}
-                className={styles.option}
-                onClick={onOptionSelect}
-                data-info={JSON.stringify(place)}
-              >
-                {place.name}
-              </button>
-            ))
-          ) : (
-            <button className={styles.option}>No places found</button>
-          )}
-        </Fragment>
+        <button className={styles.option}>No places found</button>
       )}
     </div>
   </div>
