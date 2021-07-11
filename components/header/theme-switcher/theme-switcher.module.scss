@@ -15,22 +15,15 @@
 
 .buttonDark,
 .buttonLight {
-  font-size: 1.5rem;
-}
-
-.buttonDark::before,
-.buttonLight::before {
   position: relative;
   transition: all 0.5s ease-in-out;
 }
 
-.buttonLight::before {
-  content: '\01F31E';
+.buttonLight {
   left: 1.7rem;
 }
 
-.buttonDark::before {
-  content: '\01F311';
+.buttonDark {
   left: 4rem;
 }
 

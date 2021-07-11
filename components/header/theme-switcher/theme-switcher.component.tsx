@@ -1,6 +1,10 @@
 import { Theme } from '@models/client';
 import classNames from 'classnames';
 import styles from './theme-switcher.module.scss';
+import Image from 'next/image';
+
+import moonIcon from '@images/theme-icons/moon.png';
+import sunIcon from '@images/theme-icons/sun.png';
 
 interface Props {
   theme: string;
@@ -21,7 +25,14 @@ const ThemeSwitcherComponent = ({ theme, onThemeSwitch }: Props) => (
         },
       )}
       onClick={onThemeSwitch}
-    />
+    >
+      <Image
+        src={theme === Theme.light ? sunIcon : moonIcon}
+        alt='theme icon'
+        width={30}
+        height={30}
+      />
+    </button>
     <div className={styles.line} />
   </div>
 );
