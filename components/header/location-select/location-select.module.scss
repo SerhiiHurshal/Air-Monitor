@@ -84,21 +84,20 @@
   background-color: transparent;
 
   @include color-change-animation();
-
-  &:focus,
-  &:focus-visible {
-    border-radius: 0;
-    border-top-left-radius: 0.4rem;
-    border-top-right-radius: 0.4rem;
-    border: none;
-    border-bottom: 1px solid $select-hover-color;
-    box-shadow: 0 4px 8px 0 $shadow-transparent-high,
-      0 6px 20px 0 $shadow-transparent-high;
-    outline: none;
-  }
 }
 
-.selectContainer:focus-within .optionsContainer {
+.inputFocused {
+  border-radius: 0;
+  border-top-left-radius: 0.4rem;
+  border-top-right-radius: 0.4rem;
+  border: none;
+  border-bottom: 1px solid $select-hover-color;
+  box-shadow: 0 4px 8px 0 $shadow-transparent-high,
+    0 6px 20px 0 $shadow-transparent-high;
+  outline: none;
+}
+
+.open {
   display: block;
 }
 

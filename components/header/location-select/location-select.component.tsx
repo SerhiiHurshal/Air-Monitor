@@ -1,7 +1,8 @@
-import { ChangeEvent, MouseEvent } from 'react';
+import { ChangeEvent, MouseEvent, RefObject } from 'react';
 import { Place } from '@models/client';
 
 import styles from './location-select.module.scss';
+import classNames from 'classnames';
 
 interface LocationSelectComponentProps {
   options: Place[];
@@ -9,6 +10,9 @@ interface LocationSelectComponentProps {
   onOptionSelect: (e: MouseEvent<HTMLButtonElement>) => void;
   locationInputValue: string;
   isSearchLoading: boolean;
+  isOpen: boolean;
+  setIsOpen: (flag: boolean) => void;
+  dropdown: RefObject<HTMLDivElement>;
 }
 
 const LocationSelectComponent = ({
@@ -16,16 +20,27 @@ const LocationSelectComponent = ({
   onInputChange,
   onOptionSelect,
   locationInputValue,
+  isOpen,
+  setIsOpen,
+  dropdown,
 }: LocationSelectComponentProps) => (
-  <div className={styles.selectContainer}>
+  <div
+    className={classNames(styles.selectContainer, {
+      [styles.inputFocused]: isOpen,
+    })}
+    ref={dropdown}
+  >
     <input
       type='text'
       onChange={onInputChange}
+      onFocus={() => setIsOpen(true)}
       className={styles.input}
       placeholder='Find...'
       value={locationInputValue}
     />
-    <div className={styles.optionsContainer}>
+    <div
+      className={classNames(styles.optionsContainer, { [styles.open]: isOpen })}
+    >
       {options?.length ? (
         options.map((place) => (
           <button
