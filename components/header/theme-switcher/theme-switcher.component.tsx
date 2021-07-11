@@ -12,29 +12,49 @@ interface Props {
 }
 
 const ThemeSwitcherComponent = ({ theme, onThemeSwitch }: Props) => (
-  <div className={styles.container}>
-    <button
-      aria-label='button to switch theme'
-      className={classNames(
-        styles.button,
-        {
-          [styles.buttonLight]: theme === Theme.light,
-        },
-        {
-          [styles.buttonDark]: theme !== Theme.light,
-        },
-      )}
-      onClick={onThemeSwitch}
-    >
-      <Image
+  // <div className={styles.container}>
+  //   <button
+  //     aria-label='button to switch theme'
+  //     className={classNames(
+  //       styles.button,
+  //       {
+  //         [styles.buttonLight]: theme === Theme.light,
+  //       },
+  //       {
+  //         [styles.buttonDark]: theme !== Theme.light,
+  //       },
+  //     )}
+  //     onClick={onThemeSwitch}
+  //   >
+  //     <Image
+  //       src={theme === Theme.light ? sunIcon : moonIcon}
+  //       alt='theme icon'
+  //       width={30}
+  //       height={30}
+  //     />
+  //   </button>
+  //   <div className={styles.line} />
+  // </div>
+
+  <label className={styles.switch}>
+    <input
+      type='checkbox'
+      className={styles.invisibleInput}
+      checked={theme !== Theme.light}
+      onChange={onThemeSwitch}
+    />
+    <span className={styles.slider}>
+      <img
         src={theme === Theme.light ? sunIcon : moonIcon}
         alt='theme icon'
-        width={30}
-        height={30}
+        width={23}
+        height={23}
+        className={classNames(styles.icon, {
+          [styles.iconChecked]: theme !== Theme.light,
+        })}
       />
-    </button>
-    <div className={styles.line} />
-  </div>
+    </span>
+  </label>
 );
 
 export { ThemeSwitcherComponent };
