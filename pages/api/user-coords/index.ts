@@ -3,7 +3,9 @@ import type { NextApiRequest, NextApiResponse } from 'next';
 import { userCoordsResponse } from '@models/api';
 
 const handler = nc().get(async (req: NextApiRequest, res: NextApiResponse) => {
-  const ip = req.socket.remoteAddress;
+  const ip =
+    (req.headers['x-forwarded-for'] as string)?.split(',').shift() ||
+    req.socket.remoteAddress;
 
   const response = await fetch(
     `http://api.ipstack.com/${ip}?access_key=${process.env.NEXT_PUBLIC_APISTACK_TOKEN}`,
