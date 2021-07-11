@@ -1,8 +1,7 @@
-import { ChangeEvent, Fragment, MouseEvent } from 'react';
+import { ChangeEvent, MouseEvent } from 'react';
 import { Place } from '@models/client';
 
 import styles from './location-select.module.scss';
-import classNames from 'classnames';
 
 interface LocationSelectComponentProps {
   options: Place[];
@@ -17,7 +16,6 @@ const LocationSelectComponent = ({
   onInputChange,
   onOptionSelect,
   locationInputValue,
-  isSearchLoading,
 }: LocationSelectComponentProps) => (
   <div className={styles.selectContainer}>
     <input
