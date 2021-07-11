@@ -36,8 +36,6 @@ const LocationSelect = () => {
   };
 
   const onOptionSelect = (event: MouseEvent<HTMLButtonElement>) => {
-    console.log(event);
-
     if (event.currentTarget.dataset.info) {
       const place = JSON.parse(event.currentTarget.dataset.info);
 

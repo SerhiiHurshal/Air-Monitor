@@ -1,31 +1,3 @@
-export interface mapboxFeature {
-  id: string;
-  type: string;
-  place_type: string[];
-  relevance: number;
-  properties: { [property: string]: string };
-  text: string;
-  place_name: string;
-  bbox: [number, number, number, number];
-  center: [number, number]; // longitude, latitude
-  geometry: {
-    type: string;
-    coordinates: [number, number];
-  };
-  context: {
-    id: string;
-    wikidata: string;
-    text: string;
-    short_code?: string;
-  }[];
-}
-export interface mapboxPlaces {
-  type: string;
-  query: string[];
-  features: mapboxFeature[];
-  attribution: string;
-}
-
 export interface Place {
   id: string;
   name: string;
@@ -81,6 +53,16 @@ export interface WeatherInfo {
     uv: number;
     gust_mph: number;
     gust_kph: number;
+    air_quality: {
+      co: number;
+      no2: number;
+      o3: number;
+      so2: number;
+      pm2_5: number;
+      pm10: number;
+      'us-epa-index': number;
+      'gb-defra-index': number;
+    };
   };
 }
 
