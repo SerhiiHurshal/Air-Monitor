@@ -19,18 +19,19 @@ const LocationSelect = () => {
   };
 
   const onOptionSelect = (e: MouseEvent<HTMLButtonElement>) => {
+    e.stopPropagation();
     if (e.currentTarget.dataset.info) {
       const place = JSON.parse(e.currentTarget.dataset.info);
 
       dispatch(setSelectedPlace(place));
     }
 
-    if (document.activeElement) {
-      const activeElement = document.activeElement as HTMLElement;
-      activeElement.blur();
-    }
-    setLocationInputValue('');
-    dispatch(getPlaces.success([]));
+    // if (document.activeElement) {
+    //   const activeElement = document.activeElement as HTMLElement;
+    //   activeElement.blur();
+    // }
+    // setLocationInputValue('');
+    // dispatch(getPlaces.success([]));
   };
 
   return (

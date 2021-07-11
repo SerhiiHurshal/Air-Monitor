@@ -67,8 +67,7 @@
   &:last-child:hover {
     border: none;
     background-color: $select-hover-color;
-    transform: translateY(0px);
-    transform: scale(1.1);
+    transform: translateY(0px) scale(1.1);
     box-shadow: 0 4px 8px 0 $shadow-transparent-low,
       0 6px 20px 0 $shadow-transparent-low;
 
