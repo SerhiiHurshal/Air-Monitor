@@ -1,26 +1,43 @@
-import { ChangeEvent, MouseEvent, useState } from 'react';
+import { ChangeEvent, MouseEvent, useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getPlaces, setSelectedPlace } from 'redux/general/actions';
 import { LocationSelectComponent } from './location-select.component';
-import { State } from '../../../redux/state';
+import { State } from '@redux/state';
 
 const LocationSelect = () => {
   const dispatch = useDispatch();
   const { avaliablePlaces } = useSelector((state: State) => state.general);
   const { isSearchLoading } = useSelector((state: State) => state.ui);
   const [locationInputValue, setLocationInputValue] = useState('');
+  const [isOpen, setIsOpen] = useState(false);
 
-  const onInputChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setLocationInputValue(e.target.value);
+  const dropdown = useRef<HTMLDivElement>(null);
 
-    if (e.target.value) {
-      dispatch(getPlaces(e.target.value));
+  useEffect(() => {
+    const handleClickOutside = (event: any) => {
+      if (dropdown?.current && !dropdown.current.contains(event.target)) {
+        setIsOpen(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [dropdown]);
+
+  const onInputChange = (event: ChangeEvent<HTMLInputElement>) => {
+    setLocationInputValue(event.target.value);
+
+    if (event.target.value) {
+      dispatch(getPlaces(event.target.value));
     }
   };
 
-  const onOptionSelect = (e: MouseEvent<HTMLButtonElement>) => {
-    if (e.currentTarget.dataset.info) {
-      const place = JSON.parse(e.currentTarget.dataset.info);
+  const onOptionSelect = (event: MouseEvent<HTMLButtonElement>) => {
+    if (event.currentTarget.dataset.info) {
+      const place = JSON.parse(event.currentTarget.dataset.info);
 
       dispatch(setSelectedPlace(place));
     }
@@ -29,6 +46,7 @@ const LocationSelect = () => {
       const activeElement = document.activeElement as HTMLElement;
       activeElement.blur();
     }
+    setIsOpen(false);
     setLocationInputValue('');
     dispatch(getPlaces.success([]));
   };
@@ -40,6 +58,9 @@ const LocationSelect = () => {
       onOptionSelect={onOptionSelect}
       locationInputValue={locationInputValue}
       isSearchLoading={isSearchLoading}
+      isOpen={isOpen}
+      setIsOpen={setIsOpen}
+      dropdown={dropdown}
     />
   );
 };

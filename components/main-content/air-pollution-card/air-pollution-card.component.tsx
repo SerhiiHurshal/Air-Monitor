@@ -14,34 +14,42 @@ import styles from './air-pollution-card.module.scss';
 interface Props {
   status: string;
   aqi: number;
-  avg: number;
-  max: number;
-  min: number;
+  carbonMonoxide: number;
+  ozone: number;
+  nitrogenDioxide: number;
+  sulphurDioxide: number;
   shadow: string;
 }
 
 const AirPollutionCardComponent: FC<Props> = ({
   status,
   aqi,
-  min,
-  max,
-  avg,
+  carbonMonoxide,
+  ozone,
+  nitrogenDioxide,
+  sulphurDioxide,
   shadow,
 }) => (
   <Card title='Air Pollution' shadow={shadow}>
-    {aqi > 0 && aqi < 51 && <GreenFace className={styles.icon} />}
-    {aqi < 101 && aqi > 50 && <YellowFace className={styles.icon} />}
-    {aqi < 151 && aqi > 100 && <OrangeFace className={styles.icon} />}
-    {aqi < 201 && aqi > 150 && <RedFace className={styles.icon} />}
-    {aqi < 301 && aqi > 200 && <PurpleFace className={styles.icon} />}
-    {aqi > 300 && <MaroonFace className={styles.icon} />}
+    {aqi === 1 && aqi < 51 && <GreenFace className={styles.icon} />}
+    {aqi === 2 && aqi > 50 && <YellowFace className={styles.icon} />}
+    {aqi === 3 && aqi > 100 && <OrangeFace className={styles.icon} />}
+    {aqi === 4 && aqi > 150 && <RedFace className={styles.icon} />}
+    {aqi === 5 && aqi > 200 && <PurpleFace className={styles.icon} />}
+    {aqi === 6 && <MaroonFace className={styles.icon} />}
     {!aqi && <LoadingIcon className={styles.icon} />}
     <p className={styles.status}>{status}</p>
     <div className={styles.aditionalInfoContainer}>
-      <p className={styles.aditionalInfo}>{`AQI value: ${aqi}`}</p>
-      {min && <p className={styles.aditionalInfo}>{`Minimum AQI: ${min}`}</p>}
-      {max && <p className={styles.aditionalInfo}>{`Maximum AQI: ${max}`}</p>}
-      {avg && <p className={styles.aditionalInfo}>{`Avarage AQI: ${avg}`}</p>}
+      <p className={styles.aditionalInfo}>
+        {`Carbon Monoxide: ${carbonMonoxide}`}
+      </p>
+      <p className={styles.aditionalInfo}>{`Ozone: ${ozone}`}</p>
+      <p className={styles.aditionalInfo}>
+        {`Nitrogen dioxide: ${nitrogenDioxide}`}
+      </p>
+      <p className={styles.aditionalInfo}>
+        {`Sulphur dioxide: ${sulphurDioxide}`}
+      </p>
     </div>
   </Card>
 );

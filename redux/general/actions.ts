@@ -1,4 +1,4 @@
-import { AirPollutionInfo, Coords, Place, WeatherInfo } from '@models/client';
+import { Coords, Place, WeatherInfo } from '@models/client';
 import { make } from 'redux-chill';
 
 /**
@@ -7,13 +7,6 @@ import { make } from 'redux-chill';
 const getWeatherInfo = make('[general] get weather info')
   .stage((coords?: Coords) => coords)
   .stage('success', (weatherInfo: WeatherInfo) => weatherInfo);
-
-/**
- * Fetch air pollution info
- */
-const getAirPollutionInfo = make('[general] get air pollution info')
-  .stage((coords: Coords) => coords)
-  .stage('success', (apiPollutionInfo: AirPollutionInfo) => apiPollutionInfo);
 
 /**
  * Fetch avaliable places by user input
@@ -29,4 +22,4 @@ const setSelectedPlace = make('[general] set selected place')
   .stage((place: Place) => place)
   .stage('success', (place: Place) => place);
 
-export { getWeatherInfo, getAirPollutionInfo, getPlaces, setSelectedPlace };
+export { getWeatherInfo, getPlaces, setSelectedPlace };

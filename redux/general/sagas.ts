@@ -1,14 +1,9 @@
-import { AirPollutionInfo, Coords, Place, WeatherInfo } from '@models/client';
+import { Coords, Place, WeatherInfo } from '@models/client';
 import { Context } from '@redux/store';
 import { setCardLoading, setSearchLoading } from '@redux/ui/actions';
 import { Payload, Saga } from 'redux-chill';
-import { all, put, call } from 'redux-saga/effects';
-import {
-  getAirPollutionInfo,
-  getWeatherInfo,
-  setSelectedPlace,
-  getPlaces,
-} from './actions';
+import { put, call } from 'redux-saga/effects';
+import { getWeatherInfo, setSelectedPlace, getPlaces } from './actions';
 
 /**
  * General saga
@@ -20,9 +15,7 @@ class GeneralSaga {
   @Saga(getWeatherInfo)
   public *getWeatherInfo(
     coords: Payload<typeof getWeatherInfo>,
-    {
-      api: { fetchAirPollutionInfo, fetchWeatherInfo, fetchUserCoords },
-    }: Context,
+    { api: { fetchWeatherInfo, fetchUserCoords } }: Context,
   ) {
     let parsedCoords = coords as Coords;
 
@@ -36,28 +29,22 @@ class GeneralSaga {
         : { latitude: 51.5, longitude: 0.1 };
     }
 
-    const [airPollutionInfo, weatherInfo]: [
-      AirPollutionInfo,
-      WeatherInfo,
-    ] = yield all([
-      call(fetchAirPollutionInfo, parsedCoords),
-      call(fetchWeatherInfo, parsedCoords),
-    ]);
+    const weatherInfo: WeatherInfo = yield call(fetchWeatherInfo, parsedCoords);
 
     const place: Place = {
-      id: airPollutionInfo.idx.toString(),
-      name: airPollutionInfo.city.name,
+      id: weatherInfo.location.tz_id.toString(),
+      name: weatherInfo.location.name,
       center: {
-        latitude: +airPollutionInfo.city.geo[0],
-        longitude: +airPollutionInfo.city.geo[1],
+        latitude: weatherInfo.location.lat,
+        longitude: weatherInfo.location.lon,
       },
     };
 
-    yield all([
-      put(getWeatherInfo.success(weatherInfo)),
-      put(getAirPollutionInfo.success(airPollutionInfo)),
-      put(setSelectedPlace.success(place)),
-    ]);
+    yield put(getWeatherInfo.success(weatherInfo));
+
+    if (!coords) {
+      yield put(setSelectedPlace.success(place));
+    }
 
     yield put(setCardLoading(false));
   }

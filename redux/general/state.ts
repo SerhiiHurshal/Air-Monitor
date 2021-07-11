@@ -1,4 +1,4 @@
-import { Place, AirPollutionInfo, WeatherInfo } from '@models/client';
+import { Place, WeatherInfo } from '@models/client';
 
 /**
  * General state
@@ -13,47 +13,6 @@ class GeneralState {
    * Avaliable places
    */
   public avaliablePlaces: Place[] = [];
-
-  /**
-   * Air pollution info
-   */
-  public airPollutionInfo: AirPollutionInfo = {
-    idx: 0,
-    aqi: 0,
-    time: {
-      v: 0,
-      s: 'loading...',
-      tz: 'loading...',
-    },
-    city: {
-      name: 'loading...',
-      url: 'loading...',
-      geo: ['0', '0'], // latitude, longitude
-    },
-    iaqi: {
-      pm25: {
-        v: 0,
-      },
-    },
-    forecast: {
-      daily: {
-        pm25: [
-          {
-            avg: 0,
-            day: 'loading...',
-            max: 0,
-            min: 0,
-          },
-          {
-            avg: 0,
-            day: 'loading...',
-            max: 0,
-            min: 0,
-          },
-        ],
-      },
-    },
-  };
 
   /**
    * Weather info
@@ -97,6 +56,16 @@ class GeneralState {
       uv: 0,
       gust_mph: 0,
       gust_kph: 0,
+      air_quality: {
+        co: 0,
+        no2: 0,
+        o3: 0,
+        so2: 0,
+        pm2_5: 0,
+        pm10: 0,
+        'us-epa-index': 0,
+        'gb-defra-index': 0,
+      },
     },
   };
 }

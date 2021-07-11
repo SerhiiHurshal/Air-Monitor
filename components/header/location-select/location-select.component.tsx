@@ -1,4 +1,4 @@
-import { ChangeEvent, Fragment, MouseEvent } from 'react';
+import { ChangeEvent, MouseEvent, RefObject } from 'react';
 import { Place } from '@models/client';
 
 import styles from './location-select.module.scss';
@@ -10,6 +10,9 @@ interface LocationSelectComponentProps {
   onOptionSelect: (e: MouseEvent<HTMLButtonElement>) => void;
   locationInputValue: string;
   isSearchLoading: boolean;
+  isOpen: boolean;
+  setIsOpen: (flag: boolean) => void;
+  dropdown: RefObject<HTMLDivElement>;
 }
 
 const LocationSelectComponent = ({
@@ -17,42 +20,40 @@ const LocationSelectComponent = ({
   onInputChange,
   onOptionSelect,
   locationInputValue,
-  isSearchLoading,
+  isOpen,
+  setIsOpen,
+  dropdown,
 }: LocationSelectComponentProps) => (
-  <div className={styles.selectContainer}>
+  <div
+    className={classNames(styles.selectContainer, {
+      [styles.inputFocused]: isOpen,
+    })}
+    ref={dropdown}
+  >
     <input
       type='text'
       onChange={onInputChange}
+      onFocus={() => setIsOpen(true)}
       className={styles.input}
       placeholder='Find...'
       value={locationInputValue}
     />
     <div
-      className={classNames(styles.optionsContainer, {
-        [`${styles.optionsContainerWithoutScroll}`]: isSearchLoading,
-      })}
+      className={classNames(styles.optionsContainer, { [styles.open]: isOpen })}
     >
-      {isSearchLoading ? (
-        <div className={styles.loaderWrapper}>
-          <div className={styles.loader}></div>
-        </div>
+      {options?.length ? (
+        options.map((place) => (
+          <button
+            key={place.id}
+            className={styles.option}
+            onClick={onOptionSelect}
+            data-info={JSON.stringify(place)}
+          >
+            {place.name}
+          </button>
+        ))
       ) : (
-        <Fragment>
-          {options?.length ? (
-            options.map((place) => (
-              <button
-                key={place.id}
-                className={styles.option}
-                onClick={onOptionSelect}
-                data-info={JSON.stringify(place)}
-              >
-                {place.name}
-              </button>
-            ))
-          ) : (
-            <button className={styles.option}>No places found</button>
-          )}
-        </Fragment>
+        <button className={styles.option}>No places found</button>
       )}
     </div>
   </div>

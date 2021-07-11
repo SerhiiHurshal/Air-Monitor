@@ -26,79 +26,6 @@ export interface mapboxPlaces {
   attribution: string;
 }
 
-export type getPlacesAction = {
-  type: string;
-  payload: string;
-};
-
-export type setPlacesAction = {
-  type: string;
-  payload: place[];
-};
-
-export type setSelectedPlaceAction = {
-  type: string;
-  payload: place;
-};
-
-export type setAirPollutionInfoAction = {
-  type: string;
-  payload: airPollutionInfoData;
-};
-
-export type setWeatherInfoAction = {
-  type: string;
-  payload: weatherInfo;
-};
-
-export interface place {
-  id: string;
-  name: string;
-  center: [number, number];
-}
-
-export interface airPollutionInfoData {
-  idx: number;
-  aqi: number;
-  time: {
-    v: number;
-    s: string;
-    tz: string;
-  };
-  city: {
-    name: string;
-    url: string;
-    geo: [string, string]; // latitude, longitude
-  };
-  iaqi: {
-    pm25: {
-      v: number;
-    };
-  };
-  forecast: {
-    daily: {
-      pm25: [
-        {
-          avg: number;
-          day: string;
-          max: number;
-          min: number;
-        },
-        {
-          avg: number;
-          day: string;
-          max: number;
-          min: number;
-        },
-      ];
-    };
-  };
-}
-export interface airPollutionInfo {
-  status: string;
-  data: airPollutionInfoData;
-}
-
 export interface weatherInfo {
   location: {
     name: string;
@@ -138,6 +65,16 @@ export interface weatherInfo {
     uv: number;
     gust_mph: number;
     gust_kph: number;
+    air_quality: {
+      co: number;
+      no2: number;
+      o3: number;
+      so2: number;
+      pm2_5: number;
+      pm10: number;
+      'us-epa-index': number;
+      'gb-defra-index': number;
+    };
   };
 }
 

@@ -9,7 +9,7 @@ import styles from './main-content.module.scss';
 import classNames from 'classnames';
 
 const MainContent = () => {
-  const { selectedPlace, airPollutionInfo } = useSelector(
+  const { selectedPlace, weatherInfo } = useSelector(
     (state: State) => state.general,
   );
 
@@ -37,10 +37,10 @@ const MainContent = () => {
           className={classNames(styles.locationInfo, {
             [`${styles.locationInfoVisible}`]: !isCardLoading,
           })}
-          title={airPollutionInfo?.city?.name}
+          title={`${weatherInfo.location.name}, ${weatherInfo.location.region}`}
         >
           <span className={styles.bold}>Nearest station:</span>
-          {airPollutionInfo?.city?.name}
+          {`${weatherInfo.location.name}, ${weatherInfo.location.region}`}
         </p>
       </section>
       <section className={styles.cardsContainer}>
