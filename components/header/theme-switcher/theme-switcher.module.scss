@@ -1,45 +1,63 @@
 @import '@shared.scss';
 
-.container {
-  @include flex(center, center);
-  justify-self: flex-end;
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
   margin-left: auto;
   margin-right: 2rem;
 }
 
-.button {
-  background-color: transparent;
-  display: flex;
-  border-radius: 50%;
-  border: none;
+.invisibleInput {
+  opacity: 0;
+  width: 0;
+  height: 0;
 }
 
-.buttonDark,
-.buttonLight {
-  position: relative;
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+
+  background-color: $font-color-primary;
+  @include color-change-animation();
+  transition: all 0.5s ease-in-out;
+  border-radius: 999px;
+}
+
+.icon {
+  position: absolute;
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: transparent;
   transition: all 0.5s ease-in-out;
 }
 
-.buttonLight {
-  left: 30px;
-}
-
-.buttonDark {
-  left: 70px;
-}
-
-.line {
-  height: 1rem;
-  width: 3rem;
-  background-color: $font-color-primary;
-  border-radius: 999px;
-
-  @include color-change-animation();
+.iconChecked {
+  transform: translateX(26px);
 }
 
 @media (max-width: 522px) {
-  .container {
+  .switch {
     order: 3;
     margin: 0;
+    margin-left: 1rem;
+    width: 50px;
+    height: 30px;
+  }
+
+  .icon {
+    height: 22px;
+    width: 22px;
+  }
+
+  .iconChecked {
+    transform: translateX(22px);
   }
 }

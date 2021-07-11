@@ -18,4 +18,3 @@ Website that provides information about air pollution and current weather anywhe
 - [ ] Weather and air pollution forecast
 - [ ] Air pollution map
 - [ ] Telegram bot
-- [ ] PWA
