@@ -8,11 +8,17 @@ const handler = nc().get(async (req: NextApiRequest, res: NextApiResponse) => {
     req.socket.remoteAddress ||
     req.headers['x-real-ip'];
 
+  console.log(ip);
+
   const response = await fetch(
     `http://api.ipstack.com/${ip}?access_key=${process.env.NEXT_PUBLIC_APISTACK_TOKEN}`,
   );
 
+  console.log(response);
+
   const { latitude, longitude }: userCoordsResponse = await response.json();
+
+  console.log(latitude, longitude);
 
   res.status(200).json({ latitude, longitude });
 });
