@@ -3,6 +3,7 @@ import GithubIcon from '@images/social_media_icons/github.svg';
 import LinkedinIcon from '@images/social_media_icons/linkedin.svg';
 
 import styles from './footer.module.scss';
+import classNames from 'classnames';
 
 const Footer = () => (
   <footer className={styles.footer}>
@@ -41,6 +42,12 @@ const Footer = () => (
       from
       <a href='https://www.flaticon.com/' title='Flaticon'>
         FlatIcon
+      </a>
+    </div>
+    <div className={classNames(styles.licenseTitle, styles.licenseTitleLeft)}>
+      Powered by
+      <a href='https://www.weatherapi.com/' title='Free Weather API'>
+        WeatherAPI.com
       </a>
     </div>
   </footer>

@@ -57,9 +57,17 @@
   }
 }
 
+.licenseTitleLeft {
+  left: 0;
+  right: auto;
+}
+
 @media (max-width: 664px) {
   .socialMediaIcons {
     margin-bottom: 1.2rem;
+  }
+  .licenseTitle {
+    position: initial;
   }
 }
 
