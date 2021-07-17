@@ -21,8 +21,16 @@ class GeneralSaga {
 
     yield put(setCardLoading(true));
 
+    if (!coords && localStorage.getItem('place')) {
+      const defaultPlace: Place = JSON.parse(
+        localStorage.getItem('place') as string,
+      );
+
+      parsedCoords = defaultPlace.center;
+    }
+
     //get user current coords from IP
-    if (!coords) {
+    if (!coords && !parsedCoords) {
       const coords: Coords = yield call(fetchUserCoords);
       parsedCoords = coords.latitude
         ? coords
@@ -44,6 +52,7 @@ class GeneralSaga {
 
     if (!coords) {
       yield put(setSelectedPlace.success(place));
+      localStorage.setItem('place', JSON.stringify(place));
     }
 
     yield put(setCardLoading(false));
@@ -73,6 +82,7 @@ class GeneralSaga {
   public *setSelectedPlace(place: Payload<typeof setSelectedPlace>) {
     yield put(getWeatherInfo(place.center));
 
+    localStorage.setItem('place', JSON.stringify(place));
     yield put(setSelectedPlace.success(place));
   }
 }
