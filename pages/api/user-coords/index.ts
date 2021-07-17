@@ -9,7 +9,7 @@ const handler = nc().get(async (req: NextApiRequest, res: NextApiResponse) => {
     req.headers['x-real-ip'];
 
   const response = await fetch(
-    `http://api.ipstack.com/${ip}?access_key=${process.env.NEXT_PUBLIC_APISTACK_TOKEN}`,
+    `https://api.ipgeolocation.io/ipgeo?apiKey=${process.env.NEXT_PUBLIC_IPGEOLOCATION_TOKEN}&ip=${ip}`,
   );
 
   const { latitude, longitude }: userCoordsResponse = await response.json();
