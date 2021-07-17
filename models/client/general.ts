@@ -9,6 +9,11 @@ export interface Coords {
   longitude: number;
 }
 
+export enum Theme {
+  light = 'light',
+  dark = 'dark',
+}
+
 export interface ApiCall<Data> {
   status: number;
   data: Data;
@@ -64,47 +69,4 @@ export interface WeatherInfo {
       'gb-defra-index': number;
     };
   };
-}
-
-export interface AirPollutionInfo {
-  aqi: number;
-  city: {
-    name: string;
-    url: string;
-    geo: [string, string]; // latitude, longitude
-  };
-  forecast: {
-    daily: {
-      pm25: [
-        {
-          avg: number;
-          day: string;
-          max: number;
-          min: number;
-        },
-        {
-          avg: number;
-          day: string;
-          max: number;
-          min: number;
-        },
-      ];
-    };
-  };
-  iaqi: {
-    pm25: {
-      v: number;
-    };
-  };
-  idx: number;
-  time: {
-    v: number;
-    s: string;
-    tz: string;
-  };
-}
-
-export enum Theme {
-  light = 'light',
-  dark = 'dark',
 }
