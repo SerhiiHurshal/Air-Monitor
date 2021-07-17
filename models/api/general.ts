@@ -1,4 +1,4 @@
-export interface mapboxFeature {
+export interface MapboxFeature {
   id: string;
   type: string;
   place_type: string[];
@@ -19,14 +19,14 @@ export interface mapboxFeature {
     short_code?: string;
   }[];
 }
-export interface mapboxPlaces {
+export interface MapboxPlaces {
   type: string;
   query: string[];
-  features: mapboxFeature[];
+  features: MapboxFeature[];
   attribution: string;
 }
 
-export interface weatherInfo {
+export interface WeatherInfo {
   location: {
     name: string;
     region: string;
@@ -78,7 +78,7 @@ export interface weatherInfo {
   };
 }
 
-export interface userCoordsResponse {
+export interface UserCoordsResponse {
   latitude: number;
   longitude: number;
 }

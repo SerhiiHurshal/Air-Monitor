@@ -1,6 +1,10 @@
 import nc from 'next-connect';
+import axios from 'axios';
+
 import type { NextApiRequest, NextApiResponse } from 'next';
-import { userCoordsResponse } from '@models/api';
+import { UserCoordsResponse } from '@models/api';
+
+const baseURL = 'https://api.ipgeolocation.io/ipgeo';
 
 const handler = nc().get(async (req: NextApiRequest, res: NextApiResponse) => {
   const ip =
@@ -8,13 +12,14 @@ const handler = nc().get(async (req: NextApiRequest, res: NextApiResponse) => {
     req.socket.remoteAddress ||
     req.headers['x-real-ip'];
 
-  const response = await fetch(
-    `https://api.ipgeolocation.io/ipgeo?apiKey=${process.env.NEXT_PUBLIC_IPGEOLOCATION_TOKEN}&ip=${ip}`,
+  const {
+    status,
+    data: { latitude, longitude },
+  } = await axios.get<UserCoordsResponse>(
+    `${baseURL}?apiKey=${process.env.NEXT_PUBLIC_IPGEOLOCATION_TOKEN}&ip=${ip}`,
   );
 
-  const { latitude, longitude }: userCoordsResponse = await response.json();
-
-  res.status(200).json({ latitude, longitude });
+  res.status(status).json({ latitude, longitude });
 });
 
 export default handler;
