@@ -82,3 +82,8 @@ export interface UserCoordsResponse {
   latitude: number;
   longitude: number;
 }
+
+export enum Stages {
+  development = 'development',
+  production = 'production',
+}
