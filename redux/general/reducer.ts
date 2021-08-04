@@ -1,6 +1,11 @@
 import { reducer } from 'redux-chill';
 import { GeneralState } from './state';
-import { getWeatherInfo, getPlaces, setSelectedPlace } from './actions';
+import {
+  getWeatherInfo,
+  getPlaces,
+  setSelectedPlace,
+  setError,
+} from './actions';
 
 const generalReducer = reducer(new GeneralState())
   .on(getWeatherInfo.success, (state, weatherInfo) => {
@@ -11,6 +16,9 @@ const generalReducer = reducer(new GeneralState())
   })
   .on(setSelectedPlace.success, (state, selectedPlace) => {
     state.selectedPlace = selectedPlace;
+  })
+  .on(setError, (state, error) => {
+    state.error = error;
   });
 
 export { generalReducer };

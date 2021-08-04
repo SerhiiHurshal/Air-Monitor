@@ -68,6 +68,11 @@ class GeneralState {
       },
     },
   };
+
+  /**
+   * Error
+   */
+  public error: string = '';
 }
 
 export { GeneralState };

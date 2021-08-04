@@ -22,4 +22,11 @@ const setSelectedPlace = make('[general] set selected place')
   .stage((place: Place) => place)
   .stage('success', (place: Place) => place);
 
-export { getWeatherInfo, getPlaces, setSelectedPlace };
+/**
+ * Set error
+ */
+const setError = make('[general] set error').stage(
+  (message: string) => message,
+);
+
+export { getWeatherInfo, getPlaces, setSelectedPlace, setError };

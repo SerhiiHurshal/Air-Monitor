@@ -5,7 +5,12 @@ import { setCardLoading, setSearchLoading } from '@redux/ui/actions';
 import { Payload, Saga } from 'redux-chill';
 import { put, call, select } from 'redux-saga/effects';
 import { assertIsError } from 'utils/assertIsError';
-import { getWeatherInfo, setSelectedPlace, getPlaces } from './actions';
+import {
+  getWeatherInfo,
+  setSelectedPlace,
+  getPlaces,
+  setError,
+} from './actions';
 
 /**
  * General saga
@@ -62,7 +67,10 @@ class GeneralSaga {
       }
     } catch (error: unknown) {
       assertIsError(error);
-      console.log(error);
+      yield put(setError(error.message));
+      console.log(error.message);
+
+      window.location.replace(`${process.env.NEXT_PUBLIC_API_URL}/error`);
     } finally {
       yield put(setCardLoading(false));
     }
@@ -86,7 +94,9 @@ class GeneralSaga {
       yield put(setSearchLoading(false));
     } catch (error) {
       assertIsError(error);
-      console.log(error);
+      yield put(setError(error.message));
+      console.log(error.message);
+      window.location.replace(`${process.env.NEXT_PUBLIC_API_URL}/error`);
     }
   }
 
@@ -102,7 +112,9 @@ class GeneralSaga {
       yield put(setSelectedPlace.success(place));
     } catch (error) {
       assertIsError(error);
-      console.log(error);
+      yield put(setError(error.message));
+      console.log(error.message);
+      window.location.replace(`${process.env.NEXT_PUBLIC_API_URL}/error`);
     }
   }
 
@@ -116,7 +128,9 @@ class GeneralSaga {
       history.replaceState('', '', coords);
     } catch (error) {
       assertIsError(error);
-      console.log(error);
+      yield put(setError(error.message));
+      console.log(error.message);
+      window.location.replace(`${process.env.NEXT_PUBLIC_API_URL}/error`);
     }
   }
 }
