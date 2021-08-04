@@ -31,11 +31,11 @@ const AirPollutionCardComponent: FC<Props> = ({
   shadow,
 }) => (
   <Card title='Air Pollution' shadow={shadow}>
-    {aqi === 1 && aqi < 51 && <GreenFace className={styles.icon} />}
-    {aqi === 2 && aqi > 50 && <YellowFace className={styles.icon} />}
-    {aqi === 3 && aqi > 100 && <OrangeFace className={styles.icon} />}
-    {aqi === 4 && aqi > 150 && <RedFace className={styles.icon} />}
-    {aqi === 5 && aqi > 200 && <PurpleFace className={styles.icon} />}
+    {aqi === 1 && <GreenFace className={styles.icon} />}
+    {aqi === 2 && <YellowFace className={styles.icon} />}
+    {aqi === 3 && <OrangeFace className={styles.icon} />}
+    {aqi === 4 && <RedFace className={styles.icon} />}
+    {aqi === 5 && <PurpleFace className={styles.icon} />}
     {aqi === 6 && <MaroonFace className={styles.icon} />}
     {!aqi && <LoadingIcon className={styles.icon} />}
     <p className={styles.status}>{status}</p>

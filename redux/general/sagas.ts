@@ -1,8 +1,9 @@
 import { Coords, Place, WeatherInfo } from '@models/client';
+import { State } from '@redux/state';
 import { Context } from '@redux/store';
 import { setCardLoading, setSearchLoading } from '@redux/ui/actions';
 import { Payload, Saga } from 'redux-chill';
-import { put, call } from 'redux-saga/effects';
+import { put, call, select } from 'redux-saga/effects';
 import { assertIsError } from 'utils/assertIsError';
 import { getWeatherInfo, setSelectedPlace, getPlaces } from './actions';
 
@@ -20,6 +21,8 @@ class GeneralSaga {
   ) {
     try {
       let parsedCoords = coords as Coords;
+
+      const { selectedPlace } = yield select((state: State) => state.general);
 
       yield put(setCardLoading(true));
 
@@ -53,7 +56,7 @@ class GeneralSaga {
 
       yield put(getWeatherInfo.success(weatherInfo));
 
-      if (!coords) {
+      if (!coords || !selectedPlace) {
         yield put(setSelectedPlace.success(place));
         localStorage.setItem('place', JSON.stringify(place));
       }
@@ -97,6 +100,20 @@ class GeneralSaga {
 
       localStorage.setItem('place', JSON.stringify(place));
       yield put(setSelectedPlace.success(place));
+    } catch (error) {
+      assertIsError(error);
+      console.log(error);
+    }
+  }
+
+  /**
+   * Set selected place success
+   */
+  @Saga(setSelectedPlace.success)
+  public *setSelectedPlaceSuccess(place: Payload<typeof setSelectedPlace>) {
+    try {
+      const coords = `${place.center.latitude};${place.center.longitude}`;
+      history.replaceState('', '', coords);
     } catch (error) {
       assertIsError(error);
       console.log(error);
