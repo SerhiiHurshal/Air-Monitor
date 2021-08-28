@@ -1,13 +1,8 @@
 import { Card } from '@components/card/card';
 import { FC } from 'react';
+import Image from 'next/image';
 
 import styles from './weather-card.module.scss';
-
-import {
-  IconNumber,
-  Time,
-  WeatherIcons,
-} from '@components/weather-icons/weather-icons';
 
 interface Props {
   temp_c: number;
@@ -16,8 +11,8 @@ interface Props {
   windSpeed: number;
   wind_degree: number;
   imageParametrs: {
-    time: Time;
-    number: IconNumber;
+    time: string;
+    number: string;
   };
 }
 
@@ -29,11 +24,14 @@ const WeatherCardComponent: FC<Props> = ({
   wind_degree,
   imageParametrs,
 }) => {
-  const WeatherIcon = WeatherIcons[imageParametrs.time][imageParametrs.number];
-
   return (
     <Card title='Weather'>
-      <WeatherIcon className={styles.icon} />
+      <div className={styles.imageWrapper}>
+        <Image
+          src={`/images/weather-icons/${imageParametrs.time}/${imageParametrs.number}.svg`}
+          layout='fill'
+        />
+      </div>
       <p className={styles.status}>{`${temp_c}°C`}</p>
       <div className={styles.aditionalInfoContainer}>
         <p className={styles.aditionalInfo}>{`Pressure: ${pressure_mb} hPa`}</p>

@@ -1,4 +1,3 @@
-import { IconNumber, Time } from '@components/weather-icons/weather-icons';
 import { State } from '@redux/state';
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
@@ -25,9 +24,9 @@ const WeatherCard = () => {
   }, [icon]);
 
   const [imageParametrs, setImageParametrs] = useState<{
-    time: Time;
-    number: IconNumber;
-  }>({ time: Time.day, number: 113 });
+    time: string;
+    number: string;
+  }>({ time: 'day', number: '113' });
 
   const loadImage = (imageLink: string) => {
     const timeRegexp = imageLink.match(/64\/(.*)\//);
@@ -40,9 +39,9 @@ const WeatherCard = () => {
 
     if (!numberRegexp) return;
 
-    const time = timeRegexp[1] === 'day' ? Time.day : Time.night;
+    const time = timeRegexp[1];
 
-    const number = +numberRegexp[1] as IconNumber;
+    const number = numberRegexp[1];
 
     const parametrs = {
       time: time,

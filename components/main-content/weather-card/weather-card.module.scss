@@ -1,9 +1,5 @@
 @import '@shared.scss';
 
-.icon {
-  margin-top: 2rem;
-}
-
 .status {
   text-align: center;
   font-size: 1.7rem;
@@ -32,4 +28,13 @@
   margin: 0;
 
   @include color-change-animation();
+}
+
+.imageWrapper {
+  margin-top: 2rem;
+  width: 150px;
+  height: 101px;
+  max-height: 101px;
+  max-width: 150px;
+  position: relative;
 }
