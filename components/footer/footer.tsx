@@ -17,14 +17,14 @@ const Footer = () => (
         <MailIcon alt='email icon' className={styles.icon} />
       </a>
       <a
-        href='https://github.com/SergiyGurshal/air-pollution-web-app'
+        href='https://github.com/SerhiiHurshal/Air-Monitor'
         title='link to Github'
         className={styles.linkicon}
       >
         <GithubIcon alt='github icon' className={styles.icon} />
       </a>
       <a
-        href='https://www.linkedin.com/in/sergiy-gurshal/'
+        href='https://www.linkedin.com/in/serhii-hurshal/'
         title='link to Linkedin'
         className={styles.linkicon}
       >
